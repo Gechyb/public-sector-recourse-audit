@@ -1,0 +1,866 @@
+row_id,prob_original,found,cost,n_changed,prob_counterfactual,changes,changed_education_num,changed_hours_per_week,changed_workclass,changed_occupation,cf_hours_per_week,cf_workclass,cf_occupation,min_cost_over_budget,cf_education_num,sex,race_group,age_group
+16,0.001281025929963709,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+53,0.4699735882452043,True,0.25,1,0.5060722775952716,hours_per_week: 60 -> 65,False,True,False,False,65.0,,,,,Male,White,<30
+188,0.028429081497737967,True,4.5,3,0.5136362784981768,hours_per_week: 40 -> 80; workclass: State-gov -> Federal-gov; occupation: Farming-fishing -> Protective-serv,False,True,True,True,80.0,Federal-gov,Protective-serv,,,Male,Black,30-49
+247,0.12361857782212975,True,4.0,3,0.5043581633266657,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov; occupation: Sales -> Exec-managerial,False,True,True,True,70.0,Federal-gov,Exec-managerial,,,Female,White,<30
+250,0.004678573570133848,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+339,0.21007154785465787,True,2.5,2,0.521706714556098,hours_per_week: 48 -> 78; workclass: Private -> Federal-gov,False,True,True,False,78.0,Federal-gov,,,,Female,White,30-49
+402,0.0024263938288451676,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+450,0.15733183617494648,True,2.5,2,0.5213320852323698,workclass: State-gov -> Federal-gov; occupation: Transport-moving -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+523,0.0014583131396173744,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+633,0.006128371489855577,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+695,0.006350025817045773,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+822,0.02281055422262563,False,,0,,,False,False,False,False,,,,8.5,,Male,White,30-49
+873,0.21682966381955804,True,1.75,2,0.5306924502694375,hours_per_week: 45 -> 50; occupation: Unknown -> Exec-managerial,False,True,False,True,50.0,,Exec-managerial,,,Male,Black,50+
+935,0.4629932276786534,True,0.5,1,0.5351377367922059,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+965,0.007259524466127592,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+1084,0.018593075820171997,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+1120,0.04791472343222273,False,,0,,,False,False,False,False,,,,6.5,,Male,White,<30
+1139,0.015396750572190617,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+1188,0.13882352161811276,True,2.75,3,0.5137288268759428,hours_per_week: 40 -> 45; workclass: State-gov -> Federal-gov; occupation: Adm-clerical -> Exec-managerial,False,True,True,True,45.0,Federal-gov,Exec-managerial,,,Male,White,30-49
+1193,0.023866573642831117,False,,0,,,False,False,False,False,,,,11.5,,Male,White,50+
+1213,0.0005646012559883926,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+1244,0.05466335666157598,False,,0,,,False,False,False,False,,,,7.75,,Male,Black,<30
+1348,0.34345698158519256,True,1.25,1,0.5186855133582381,hours_per_week: 48 -> 73,False,True,False,False,73.0,,,,,Male,White,<30
+1353,0.024684338469688608,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+1381,0.02367835772512259,True,6.0,3,0.5034854099525137,hours_per_week: 4 -> 74; workclass: Private -> Self-emp-inc; occupation: Handlers-cleaners -> Exec-managerial,False,True,True,True,74.0,Self-emp-inc,Exec-managerial,,,Male,Black,50+
+1401,0.1803858247228361,True,2.75,2,0.5097393366497973,hours_per_week: 40 -> 65; occupation: Transport-moving -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,<30
+1413,0.4077381240597292,True,0.75,1,0.5150699734974257,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,30-49
+1416,0.0017295869919975685,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+1436,0.06475669950431573,False,,0,,,False,False,False,False,,,,6.5,,Female,White,50+
+1493,0.2700219551805146,True,1.5,1,0.6328995004852325,occupation: Handlers-cleaners -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,<30
+1547,0.03838512719275359,False,,0,,,False,False,False,False,,,,7.25,,Female,White,50+
+1550,0.0065097233684233285,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+1567,0.3356826915387389,True,1.25,1,0.5100260712480503,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+1616,0.2549021023913992,True,2.0,1,0.5209100740223536,hours_per_week: 35 -> 75,False,True,False,False,75.0,,,,,Female,White,50+
+1642,0.05563142287519082,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+1710,0.48771414226155274,True,0.25,1,0.5238287652314881,hours_per_week: 35 -> 40,False,True,False,False,40.0,,,,,Female,White,50+
+1920,0.35538790602793313,True,1.25,1,0.5317732233188954,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,50+
+1950,0.4376907010676502,True,0.5,1,0.5096342418064501,hours_per_week: 60 -> 70,False,True,False,False,70.0,,,,,Male,Other,30-49
+2105,0.005631822604610311,False,,0,,,False,False,False,False,,,,9.25,,Female,White,50+
+2140,0.3087197558476455,True,1.5,1,0.5152783658266309,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+2170,0.26307691991533166,True,2.0,1,0.5315301325305165,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Female,White,30-49
+2249,0.28713899995692904,True,1.75,2,0.5171017507570735,hours_per_week: 50 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,30-49
+2348,0.23419117913700793,True,2.75,2,0.527381131467521,education_num: 14 -> 15; hours_per_week: 40 -> 75,True,True,False,False,75.0,,,,15.0,Male,Black,30-49
+2406,0.0022002465545392785,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+2417,0.07540741253813378,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+2466,0.3481106097084332,True,1.0,1,0.5759689022151916,workclass: State-gov -> Federal-gov,False,False,True,False,,Federal-gov,,,,Female,White,<30
+2503,0.05681197075986836,True,3.5,3,0.5126938347564676,hours_per_week: 40 -> 60; workclass: Private -> Federal-gov; occupation: Other-service -> Exec-managerial,False,True,True,True,60.0,Federal-gov,Exec-managerial,,,Male,Other,30-49
+2512,0.2726288458993117,True,2.0,2,0.5351839616939018,hours_per_week: 50 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,30-49
+2779,0.36826053068777614,True,1.0,1,0.5096178526321609,hours_per_week: 50 -> 70,False,True,False,False,70.0,,,,,Female,White,50+
+2789,0.04884687675335754,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+2847,0.23989935108728985,True,2.0,1,0.5007734423365291,hours_per_week: 38 -> 78,False,True,False,False,78.0,,,,,Male,White,30-49
+2866,0.006369751546363838,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+2882,0.002650736389628005,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+2957,0.000700647269885913,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+3009,0.0016881247017920392,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+3066,0.006293989006741419,False,,0,,,False,False,False,False,,,,11.0,,Male,White,50+
+3148,0.32389854282886404,True,1.5,1,0.5327856528345756,hours_per_week: 50 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+3156,0.09160492728661443,False,,0,,,False,False,False,False,,,,6.75,,Female,White,50+
+3352,0.1534381002213915,True,6.0,2,0.5620455530806493,education_num: 10 -> 15; workclass: Private -> Federal-gov,True,False,True,False,,Federal-gov,,,15.0,Female,Other,50+
+3528,0.24538025971415917,True,2.0,1,0.5082293280182274,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+3530,0.002292618150421531,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+3559,0.13749045341449193,True,3.25,2,0.5068264837042982,hours_per_week: 40 -> 75; occupation: Machine-op-inspct -> Protective-serv,False,True,False,True,75.0,,Protective-serv,,,Male,White,<30
+3561,0.2783105331188741,True,1.75,1,0.5147275109581957,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+3760,0.22206695941813107,True,2.0,2,0.5157389234123654,hours_per_week: 40 -> 50; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,50.0,,Exec-managerial,,,Male,White,30-49
+3790,0.17267919649602156,True,2.5,2,0.5097393366497973,hours_per_week: 45 -> 65; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,<30
+3799,0.306362071453327,True,1.5,1,0.5125127389040723,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+3884,0.263500387236958,True,1.5,2,0.5121792684380838,hours_per_week: 40 -> 50; workclass: Local-gov -> Federal-gov,False,True,True,False,50.0,Federal-gov,,,,Male,Black,30-49
+4042,0.3189280115271188,True,1.5,1,0.5271087084713778,hours_per_week: 43 -> 73,False,True,False,False,73.0,,,,,Male,White,30-49
+4043,0.2843165164698785,True,1.25,2,0.5120457379670943,hours_per_week: 16 -> 21; workclass: Unknown -> Federal-gov,False,True,True,False,21.0,Federal-gov,,,,Male,White,50+
+4044,0.4295322232252976,True,0.5,1,0.5013303391985731,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+4098,0.3831323989099973,True,1.0,1,0.5254501827578294,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,30-49
+4103,0.05428483982911977,False,,0,,,False,False,False,False,,,,6.75,,Male,White,30-49
+4120,0.3234910498157758,True,1.5,1,0.5323222733158175,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+4132,0.09572728997762998,True,6.0,2,0.5103173948868187,education_num: 9 -> 13; hours_per_week: 40 -> 80,True,True,False,False,80.0,,,,13.0,Male,Other,30-49
+4140,0.025726672446536213,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+4167,0.1882671199120608,True,2.75,2,0.5236340736277041,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,30-49
+4346,0.059555870985390155,True,4.25,3,0.5041460243491361,hours_per_week: 40 -> 75; workclass: Self-emp-not-inc -> Federal-gov; occupation: Craft-repair -> Exec-managerial,False,True,True,True,75.0,Federal-gov,Exec-managerial,,,Male,White,30-49
+4397,0.08180274657338425,True,5.5,3,0.5211311872087889,education_num: 13 -> 16; hours_per_week: 40 -> 70; workclass: Local-gov -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,16.0,Female,White,30-49
+4409,0.020207163983625185,False,,0,,,False,False,False,False,,,,11.25,,Male,White,30-49
+4429,0.027085878623035534,False,,0,,,False,False,False,False,,,,9.5,,Male,White,<30
+4435,0.06148373326514134,True,3.75,3,0.5201128038301756,hours_per_week: 40 -> 65; workclass: Private -> Federal-gov; occupation: Handlers-cleaners -> Exec-managerial,False,True,True,True,65.0,Federal-gov,Exec-managerial,,,Male,White,50+
+4454,0.2268294374448942,True,2.25,1,0.5186324913310912,hours_per_week: 24 -> 69,False,True,False,False,69.0,,,,,Male,White,50+
+4624,0.0005298582734356772,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+4635,0.25407958448788437,True,2.0,1,0.5198280447841189,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Female,White,50+
+4641,0.019342864254812773,False,,0,,,False,False,False,False,,,,,,Female,White,50+
+4733,0.024661173305840573,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+4756,0.06452513953272304,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+4781,0.4881917878868936,True,0.25,1,0.5243055809952798,hours_per_week: 42 -> 47,False,True,False,False,47.0,,,,,Male,Other,30-49
+4798,0.026857147425461077,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+4886,0.08591598524338571,True,5.25,3,0.5036008819925076,education_num: 13 -> 15; hours_per_week: 40 -> 75; occupation: Adm-clerical -> Exec-managerial,True,True,False,True,75.0,,Exec-managerial,,15.0,Female,White,<30
+5240,0.48666865885458277,True,0.25,1,0.5227848684370935,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,50+
+5349,0.01293399914574232,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+5365,0.035903927254581025,False,,0,,,False,False,False,False,,,,9.5,,Male,White,30-49
+5414,0.041799647132950694,False,,0,,,False,False,False,False,,,,8.0,,Female,White,50+
+5439,0.019814573793613087,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+5441,0.41468437815166803,True,0.75,1,0.5222324321531069,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,50+
+5591,0.23132179441306716,True,2.25,2,0.5164871174467134,hours_per_week: 45 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,<30
+5654,0.4503946002759476,True,0.5,1,0.5224860257048245,hours_per_week: 37 -> 47,False,True,False,False,47.0,,,,,Female,Other,30-49
+5658,0.009175374384769825,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+5671,0.0974517534702529,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+5730,0.439716796926252,True,0.5,1,0.5116903170429995,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+5789,0.017960957166380177,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+5852,0.29815292607864635,True,1.5,1,0.5027836877148136,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+5891,0.010991160231946117,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+5896,0.0025807742430345604,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+5906,0.35009485632347337,True,1.25,1,0.5259967719948571,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,<30
+5990,0.20115794813330626,True,2.0,2,0.506472457312847,hours_per_week: 40 -> 60; workclass: Unknown -> Federal-gov,False,True,True,False,60.0,Federal-gov,,,,Male,White,50+
+5997,0.3126472944569121,True,1.5,1,0.5198575530955591,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+6070,0.39572604419120627,True,0.75,1,0.502579086250082,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Female,White,30-49
+6156,0.008798528509084648,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+6172,0.09046679906563064,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+6247,0.1666896846162874,True,2.0,2,0.5116145526829133,hours_per_week: 55 -> 75; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,30-49
+6290,0.08319380251993347,True,5.75,3,0.5010316089825807,education_num: 13 -> 16; hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,16.0,Male,White,<30
+6297,0.13835334899134363,True,4.0,3,0.5254570785842391,education_num: 13 -> 15; hours_per_week: 50 -> 70; workclass: Local-gov -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,15.0,Female,White,30-49
+6377,0.11311164797456937,True,5.25,3,0.5138526199415723,education_num: 13 -> 16; hours_per_week: 40 -> 65; workclass: Private -> Federal-gov,True,True,True,False,65.0,Federal-gov,,,16.0,Male,White,<30
+6433,0.004737563455393697,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+6506,0.013669791541829157,True,5.75,3,0.5313165456667027,hours_per_week: 2 -> 67; workclass: Self-emp-not-inc -> Federal-gov; occupation: Other-service -> Prof-specialty,False,True,True,True,67.0,Federal-gov,Prof-specialty,,,Female,White,30-49
+6542,0.014187025874032524,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+6628,0.021390334295657523,False,,0,,,False,False,False,False,,,,11.0,,Female,White,30-49
+6636,0.0005730358642745702,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+6886,0.0036883094234993435,False,,0,,,False,False,False,False,,,,15.0,,Female,White,50+
+6892,0.031762345310776985,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+6962,0.3349629240523769,True,1.25,1,0.5092190266922485,hours_per_week: 38 -> 63,False,True,False,False,63.0,,,,,Male,White,50+
+6993,0.1333825202497934,True,3.5,2,0.5287042306824143,hours_per_week: 40 -> 80; occupation: Transport-moving -> Exec-managerial,False,True,False,True,80.0,,Exec-managerial,,,Male,White,<30
+7021,0.04288022977338432,False,,0,,,False,False,False,False,,,,8.0,,Male,White,30-49
+7059,0.29199309159988157,True,1.75,1,0.5314735339674177,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,Other,<30
+7197,0.005500138020536411,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+7259,0.008976662400563728,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+7283,0.0021972150327835096,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+7318,0.07289170785480781,True,5.75,3,0.5260069333292801,education_num: 13 -> 16; hours_per_week: 40 -> 75; workclass: Local-gov -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,16.0,Female,Other,<30
+7341,0.46731396763489497,True,0.25,1,0.5034023954168649,hours_per_week: 45 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+7368,0.010824883082641651,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+7376,0.015840183204573165,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+7401,0.027363209758530255,False,,0,,,False,False,False,False,,,,8.5,,Male,White,30-49
+7447,0.13544975202593398,True,1.75,2,0.5072351035673149,hours_per_week: 40 -> 45; occupation: Other-service -> Exec-managerial,False,True,False,True,45.0,,Exec-managerial,,,Male,Black,50+
+7456,0.0034428721037431838,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+7500,0.012151546756899919,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+7663,0.007973930830064868,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+7760,0.32139244014197643,True,1.5,1,0.5299301268670567,hours_per_week: 9 -> 39,False,True,False,False,39.0,,,,,Male,White,30-49
+7766,0.022194940507434976,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+7788,0.16063898311296226,True,2.75,2,0.5241757668336338,hours_per_week: 42 -> 67; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,67.0,,Exec-managerial,,,Male,White,<30
+7852,0.3922632311655449,True,1.0,1,0.5350309775944618,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Female,White,50+
+7958,0.01043860697216055,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+7975,0.14524724526560734,True,2.75,3,0.5053667326752591,education_num: 14 -> 15; hours_per_week: 60 -> 75; workclass: Self-emp-not-inc -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Female,White,30-49
+8021,0.43514342536629497,True,0.5,1,0.5070458167131325,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Female,White,<30
+8035,0.09254033590653246,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+8070,0.00922714958569516,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+8090,0.02701001760239288,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+8114,0.0006506987072057216,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+8245,0.42632765332619,True,0.75,1,0.5341397264467459,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Female,White,<30
+8250,0.0018986248373850554,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+8364,0.2367805977606824,True,2.25,2,0.5240872010993347,hours_per_week: 40 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,30-49
+8397,0.4664213192868564,True,0.25,1,0.5025058414461886,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,50+
+8508,0.41340708556098377,True,0.75,1,0.5209186935254515,hours_per_week: 16 -> 31,False,True,False,False,31.0,,,,,Male,White,50+
+8522,0.0032092161393716535,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+8541,0.16891097586446904,True,3.0,2,0.5267474030715597,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,White,50+
+8551,0.00103417433371647,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+8568,0.005238381692018741,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+8664,0.0007133155246578685,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+8725,0.14996533202432624,True,2.5,2,0.5164871174467134,hours_per_week: 40 -> 70; workclass: State-gov -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,<30
+8733,0.2519230768905222,True,2.0,1,0.5169792546669653,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,Other,30-49
+8758,0.1529954790303007,True,2.75,2,0.5097393366497973,hours_per_week: 40 -> 65; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,<30
+8834,0.11497370115486259,True,3.75,3,0.5102521449888778,education_num: 14 -> 15; hours_per_week: 45 -> 80; workclass: Local-gov -> Federal-gov,True,True,True,False,80.0,Federal-gov,,,15.0,Female,White,30-49
+9079,0.05229540340773791,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+9082,0.025737406177131463,False,,0,,,False,False,False,False,,,,10.5,,Female,White,50+
+9219,0.058702527288256354,False,,0,,,False,False,False,False,,,,8.0,,Female,White,30-49
+9228,0.0011434854887521506,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9302,0.006969471587091989,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+9338,0.05157798647574254,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+9351,0.0036613481889149835,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9408,0.005997756522447141,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9414,0.04018776274184657,False,,0,,,False,False,False,False,,,,9.25,,Male,Other,30-49
+9467,0.2739513975935224,True,2.0,2,0.5360398334146728,hours_per_week: 50 -> 60; occupation: Transport-moving -> Exec-managerial,False,True,False,True,60.0,,Exec-managerial,,,Male,White,30-49
+9513,0.19616286863659466,True,1.5,1,0.5649863319989055,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,30-49
+9567,0.003618744600117214,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9604,0.004573409475564048,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9645,0.009432542294214056,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+9669,0.0049637836351380075,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+9693,0.08234113536071618,True,4.0,2,0.5277295507349578,hours_per_week: 15 -> 75; workclass: Local-gov -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,Black,30-49
+9715,0.15464752446490115,True,2.5,2,0.5250879891859312,workclass: Unknown -> Federal-gov; occupation: Unknown -> Prof-specialty,False,False,True,True,,Federal-gov,Prof-specialty,,,Male,White,50+
+9720,0.255695553845342,True,2.0,1,0.5219515063148801,hours_per_week: 38 -> 78,False,True,False,False,78.0,,,,,Male,White,30-49
+9861,0.07903941686323139,False,,0,,,False,False,False,False,,,,6.5,,Female,Other,30-49
+9899,0.29556598974740633,True,1.0,1,0.5520788454140961,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,30-49
+9992,0.0362337997318377,False,,0,,,False,False,False,False,,,,9.5,,Male,White,30-49
+10049,0.4830672157076899,True,0.25,1,0.5191864737769075,hours_per_week: 7 -> 12,False,True,False,False,12.0,,,,,Female,White,30-49
+10117,0.012415146976352076,False,,0,,,False,False,False,False,,,,8.5,,Male,White,30-49
+10147,0.0016104667079484775,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+10209,0.0005294833862358669,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+10362,0.010171481539277317,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+10386,0.22464713075978648,True,2.0,2,0.5316761447543723,hours_per_week: 40 -> 60; workclass: Local-gov -> Federal-gov,False,True,True,False,60.0,Federal-gov,,,,Male,White,30-49
+10405,0.0011887641956330511,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+10427,0.0020576885714842603,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+10519,0.04300760799593497,True,3.75,3,0.5198282458679919,hours_per_week: 55 -> 80; workclass: Self-emp-not-inc -> Federal-gov; occupation: Farming-fishing -> Prof-specialty,False,True,True,True,80.0,Federal-gov,Prof-specialty,,,Male,White,30-49
+10547,0.1561283051566662,True,2.75,2,0.5279611694658849,hours_per_week: 45 -> 80; workclass: Local-gov -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,White,30-49
+10579,0.005127528707700589,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+10592,0.4332425792494187,True,0.5,1,0.5051117490396233,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Female,White,<30
+10691,0.07060606944704162,False,,0,,,False,False,False,False,,,,6.75,,Male,White,30-49
+10732,0.12449993170865438,True,3.25,2,0.5221981891331894,hours_per_week: 30 -> 65; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Female,Black,30-49
+10812,0.02427026935259587,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+11032,0.1558304778609108,True,3.25,2,0.5309809719428155,hours_per_week: 40 -> 75; occupation: Adm-clerical -> Exec-managerial,False,True,False,True,75.0,,Exec-managerial,,,Female,White,50+
+11102,0.007034605470430528,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+11107,0.004958016064455111,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+11113,0.004316624189582807,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+11218,0.20620251142876703,True,1.5,1,0.547659258253496,occupation: Handlers-cleaners -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+11349,0.008909228948579127,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+11390,0.11012515895451606,True,4.75,3,0.5079348173749705,education_num: 13 -> 15; hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Male,White,<30
+11394,0.0019376426634237576,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+11404,0.012094530091008,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+11426,0.021700198138187254,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+11784,0.30361710738212133,True,1.5,1,0.5092768411378784,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Female,White,<30
+11843,0.17642822261023414,True,1.5,1,0.5327378221017364,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,Other,30-49
+11860,0.023399952865219054,False,,0,,,False,False,False,False,,,,8.25,,Male,White,50+
+11929,0.008645518676350104,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+11963,0.007023472069036772,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+11974,0.062267100566011375,False,,0,,,False,False,False,False,,,,7.0,,Male,White,<30
+11978,0.23078576291108502,True,1.25,2,0.5045591610811064,hours_per_week: 40 -> 45; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,45.0,Federal-gov,,,,Male,White,50+
+12077,0.053620854101953955,False,,0,,,False,False,False,False,,,,7.5,,Female,White,30-49
+12102,0.09099174440688279,True,5.25,3,0.501881648438345,education_num: 7 -> 10; hours_per_week: 40 -> 55; occupation: Machine-op-inspct -> Exec-managerial,True,True,False,True,55.0,,Exec-managerial,,10.0,Male,White,<30
+12217,0.3464923531626523,True,1.25,1,0.5220381477410668,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+12530,0.23097423836834235,True,2.25,2,0.515998719972945,hours_per_week: 42 -> 67; workclass: Private -> Federal-gov,False,True,True,False,67.0,Federal-gov,,,,Male,White,30-49
+12602,0.12528762013963476,True,5.5,2,0.5136312825696214,education_num: 9 -> 13; hours_per_week: 40 -> 70,True,True,False,False,70.0,,,,13.0,Female,White,50+
+12608,0.4215298970049096,True,0.75,1,0.5292480153056177,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,30-49
+12686,0.028883237686332292,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+12708,0.0024435932613595854,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+12763,0.07772349775579936,False,,0,,,False,False,False,False,,,,7.5,,Female,White,30-49
+12782,0.035260248508376994,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+12829,0.0030440659096822374,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+12857,0.0014711667979286675,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+12986,0.3261153108461108,True,1.0,1,0.5870462972767981,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,Other,50+
+13027,0.12052928877395377,True,2.5,2,0.5394557199298934,workclass: State-gov -> Federal-gov; occupation: Handlers-cleaners -> Tech-support,False,False,True,True,,Federal-gov,Tech-support,,,Male,White,50+
+13028,0.4197745709304339,True,0.75,1,0.5274531296256657,hours_per_week: 50 -> 65,False,True,False,False,65.0,,,,,Male,Other,30-49
+13060,0.09390345499343328,True,5.75,3,0.5341893167112317,education_num: 13 -> 16; hours_per_week: 39 -> 74; workclass: Private -> Federal-gov,True,True,True,False,74.0,Federal-gov,,,16.0,Female,Black,30-49
+13090,0.013571005944171358,False,,0,,,False,False,False,False,,,,12.25,,Female,White,50+
+13146,0.02639672044656872,False,,0,,,False,False,False,False,,,,11.25,,Male,Black,30-49
+13182,0.0027594786753051344,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13281,0.32987736532513723,True,1.25,1,0.5034908083615809,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,<30
+13299,0.0378148216083916,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+13346,0.25867768298177246,True,1.5,2,0.5059316961937972,hours_per_week: 40 -> 50; workclass: Local-gov -> Federal-gov,False,True,True,False,50.0,Federal-gov,,,,Male,White,30-49
+13362,0.009736397001618284,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13378,0.0005179184369002118,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13380,0.3422441251404631,True,1.25,1,0.51734146025241,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+13438,0.001208486215995215,False,,0,,,False,False,False,False,,,,,,Female,Black,50+
+13528,0.02910409989191052,True,3.75,2,0.5063745496223956,hours_per_week: 2 -> 47; occupation: Priv-house-serv -> Protective-serv,False,True,False,True,47.0,,Protective-serv,,,Male,White,30-49
+13577,0.4601218696593319,True,0.5,1,0.5322624259020764,hours_per_week: 24 -> 34,False,True,False,False,34.0,,,,,Male,White,50+
+13594,0.32424562466854784,True,1.5,1,0.533180051972992,hours_per_week: 50 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+13674,0.01720982634544178,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13692,0.12083969275976181,True,3.75,3,0.521041440840178,hours_per_week: 40 -> 65; workclass: Private -> Federal-gov; occupation: Adm-clerical -> Exec-managerial,False,True,True,True,65.0,Federal-gov,Exec-managerial,,,Female,White,50+
+13751,0.000667159443170399,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13809,0.27709410565956427,True,1.75,1,0.5132125845746605,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+13890,0.05823719952586501,True,5.5,3,0.5023810599974561,education_num: 5 -> 8; hours_per_week: 45 -> 75; workclass: Self-emp-not-inc -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,8.0,Male,White,30-49
+13926,0.008642531680175392,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+13951,0.0019027983718351948,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+14003,0.28672661039128994,True,1.5,1,0.5290226165052939,occupation: Machine-op-inspct -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,Black,50+
+14008,0.012745249814298318,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+14022,0.17949517307942467,True,1.5,1,0.5048537728942819,occupation: Handlers-cleaners -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,30-49
+14028,0.1145347433432807,True,4.75,3,0.5189834264761014,education_num: 14 -> 16; hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,16.0,Female,White,30-49
+14094,0.09665774306697798,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+14111,0.27135427692048736,True,1.75,1,0.5060052470638171,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+14549,0.011822729077922336,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+14652,0.25716812671585554,True,1.5,1,0.5502998193001738,occupation: Unknown -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,Other,30-49
+14672,0.15354836057547622,True,2.75,3,0.5216876525866073,education_num: 13 -> 14; hours_per_week: 50 -> 65; workclass: Self-emp-not-inc -> Federal-gov,True,True,True,False,65.0,Federal-gov,,,14.0,Male,White,30-49
+14683,0.18593222863841696,True,1.75,2,0.5086333273327166,hours_per_week: 45 -> 60; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,60.0,Federal-gov,,,,Male,White,<30
+14686,0.020355697724390734,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+14900,0.1529954790303007,True,2.75,2,0.5097393366497973,hours_per_week: 40 -> 65; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,<30
+15043,0.16379384105367364,True,3.0,3,0.5082345556343708,hours_per_week: 50 -> 60; workclass: Private -> Federal-gov; occupation: Transport-moving -> Exec-managerial,False,True,True,True,60.0,Federal-gov,Exec-managerial,,,Male,White,50+
+15109,0.441639110156901,True,0.5,1,0.5136388251013585,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,Black,50+
+15166,0.018319868902031803,False,,0,,,False,False,False,False,,,,9.25,,Male,White,30-49
+15168,0.003289240124344541,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+15179,0.17757857136773372,True,2.0,2,0.5306861301859096,hours_per_week: 25 -> 45; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,45.0,Federal-gov,,,,Male,White,30-49
+15319,0.17508203210087,True,1.5,1,0.5304239081204983,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+15410,0.422523505753576,True,1.0,1,0.6824715717692887,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,30-49
+15434,0.01090322178983363,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+15608,0.045057271002557506,False,,0,,,False,False,False,False,,,,8.75,,Male,White,30-49
+15635,0.014883899130442933,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+15715,0.014142907385422301,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+15836,0.34354743934059745,True,1.0,1,0.5446994201799926,workclass: Unknown -> Federal-gov,False,False,True,False,,Federal-gov,,,,Female,White,30-49
+15899,0.26643982928394944,True,2.0,1,0.5358294757830061,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+15912,0.32256295249799016,True,1.0,1,0.5211831163446137,workclass: Unknown -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+15979,0.34757613005041044,True,1.25,1,0.5232313835793596,hours_per_week: 44 -> 69,False,True,False,False,69.0,,,,,Male,White,30-49
+15984,0.08512050215657939,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+16020,0.1033434589727941,True,6.0,2,0.5315301325305165,education_num: 10 -> 14; hours_per_week: 40 -> 80,True,True,False,False,80.0,,,,14.0,Female,White,30-49
+16071,0.04917047076116965,True,4.25,3,0.5011689352562185,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov; occupation: Other-service -> Tech-support,False,True,True,True,75.0,Federal-gov,Tech-support,,,Male,White,<30
+16091,0.030297206662529563,False,,0,,,False,False,False,False,,,,,,Female,White,50+
+16205,0.11042965767238641,True,5.25,3,0.507581028284023,education_num: 4 -> 6; hours_per_week: 44 -> 79; occupation: Transport-moving -> Prof-specialty,True,True,False,True,79.0,,Prof-specialty,,6.0,Male,White,50+
+16504,0.1956326689023393,True,2.5,1,0.5078966367328168,hours_per_week: 20 -> 70,False,True,False,False,70.0,,,,,Male,Black,50+
+16691,0.010670690204592544,False,,0,,,False,False,False,False,,,,9.75,,Female,Black,30-49
+16775,0.014925945717171115,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+16906,0.005356469843810918,False,,0,,,False,False,False,False,,,,,,Male,Black,30-49
+17108,0.011620922025289577,False,,0,,,False,False,False,False,,,,11.0,,Female,White,30-49
+17110,0.028085262048158338,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+17173,0.2931632099739359,True,1.75,1,0.5328810301440597,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Female,Other,<30
+17194,0.03248514906508468,False,,0,,,False,False,False,False,,,,9.0,,Male,White,30-49
+17202,0.013989823264077382,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+17217,0.12177497340678364,True,3.5,2,0.5034525086393564,hours_per_week: 25 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,White,30-49
+17294,0.4437732112243049,True,0.5,1,0.5157994465394488,hours_per_week: 44 -> 54,False,True,False,False,54.0,,,,,Male,White,30-49
+17310,0.23951408093911983,True,2.5,2,0.5213904358126296,hours_per_week: 50 -> 80; workclass: Self-emp-inc -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,Other,30-49
+17388,0.002175813909435329,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+17419,0.26510625248233055,True,2.0,2,0.5256522439676782,hours_per_week: 53 -> 73; workclass: Private -> Federal-gov,False,True,True,False,73.0,Federal-gov,,,,Male,White,<30
+17446,0.0332419266325379,False,,0,,,False,False,False,False,,,,9.5,,Female,Black,30-49
+17498,0.009906774683831427,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+17522,0.03572139659085196,False,,0,,,False,False,False,False,,,,8.5,,Female,White,50+
+17545,0.008937710548031965,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+17548,0.22868192942704144,True,1.25,2,0.5015870140642391,hours_per_week: 35 -> 40; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,40.0,Federal-gov,,,,Male,White,50+
+17550,0.17054099298833517,True,2.5,2,0.5182282113969187,hours_per_week: 40 -> 70; workclass: Local-gov -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,30-49
+17601,0.038075248352231084,False,,0,,,False,False,False,False,,,,8.0,,Female,White,50+
+17638,0.08720230132750303,True,5.25,3,0.5154957778091565,education_num: 13 -> 15; hours_per_week: 37 -> 82; workclass: Private -> Federal-gov,True,True,True,False,82.0,Federal-gov,,,15.0,Male,White,30-49
+17676,0.006957629433821299,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+17720,0.3157394372310262,True,1.5,1,0.5234384082110441,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+17755,0.003326401943953977,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+17788,0.3522110775611612,True,1.25,1,0.5283119255245179,hours_per_week: 50 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+17889,0.1252804480607212,True,4.5,3,0.5291070726727702,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov; occupation: Craft-repair -> Tech-support,False,True,True,True,80.0,Federal-gov,Tech-support,,,Male,White,30-49
+17914,0.0006616835750691397,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+17988,0.0033945306823448835,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+18056,0.0769708102305823,True,5.25,3,0.530062582741099,education_num: 6 -> 8; hours_per_week: 40 -> 75; occupation: Machine-op-inspct -> Exec-managerial,True,True,False,True,75.0,,Exec-managerial,,8.0,Male,White,30-49
+18073,0.0032124000904590363,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+18075,0.08117250944693756,True,5.0,3,0.5083911486535978,education_num: 10 -> 12; hours_per_week: 40 -> 70; occupation: Machine-op-inspct -> Exec-managerial,True,True,False,True,70.0,,Exec-managerial,,12.0,Male,Black,30-49
+18094,0.0050235043922066975,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+18134,0.07919644048303755,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+18139,0.0016084056634009668,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+18198,0.40996438213843334,True,0.75,1,0.5173703355991489,hours_per_week: 46 -> 61,False,True,False,False,61.0,,,,,Male,Black,<30
+18199,0.021815605714423734,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+18223,0.02399978393130324,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+18237,0.43820593636621896,True,0.5,1,0.5101573317312971,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+18341,0.018774909506445683,False,,0,,,False,False,False,False,,,,7.5,,Female,Other,30-49
+18377,0.03582866124848595,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+18435,0.01734196478541972,False,,0,,,False,False,False,False,,,,7.5,,Female,White,50+
+18570,0.11749246288620269,True,2.75,2,0.5182337993323046,hours_per_week: 24 -> 59; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,59.0,Federal-gov,,,,Male,White,30-49
+18575,0.04019422200856848,False,,0,,,False,False,False,False,,,,8.5,,Female,White,50+
+18588,0.0030747939178687083,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+18656,0.030534253733649208,False,,0,,,False,False,False,False,,,,9.75,,Female,Black,<30
+18662,0.0013934963242004028,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+18678,0.003618744600117214,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+18805,0.09978966455924917,True,5.25,3,0.5273596934968726,education_num: 4 -> 7; hours_per_week: 40 -> 55; occupation: Machine-op-inspct -> Exec-managerial,True,True,False,True,55.0,,Exec-managerial,,7.0,Male,White,50+
+18860,0.18658111303054517,True,2.75,1,0.5293579310537011,hours_per_week: 25 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+18982,0.09143144138909287,True,4.5,3,0.5075786910210279,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov; occupation: Adm-clerical -> Protective-serv,False,True,True,True,80.0,Federal-gov,Protective-serv,,,Female,White,30-49
+19004,0.014338544446499076,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+19009,0.0018433212716161861,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+19176,0.02416887982102087,False,,0,,,False,False,False,False,,,,9.75,,Female,White,30-49
+19254,0.2595308418887636,True,2.0,1,0.5269530291636464,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+19262,0.0005964450104770235,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+19611,0.00730104393562091,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+19790,0.005013832443393205,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+19843,0.024155789204882854,False,,0,,,False,False,False,False,,,,9.75,,Male,White,50+
+19899,0.0020387828535193436,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+19956,0.0003085383459944783,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+19987,0.0015032684492384376,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+19998,0.046318543070330044,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+20139,0.05152833835786049,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+20329,0.16460006791509865,True,2.0,2,0.5078360813534849,hours_per_week: 20 -> 40; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,40.0,Federal-gov,,,,Male,White,50+
+20349,0.03206415555909434,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+20431,0.022762704833869524,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+20461,0.007501868847442624,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+20503,0.05884064610359864,False,,0,,,False,False,False,False,,,,7.25,,Male,White,30-49
+20509,0.040197635501213844,False,,0,,,False,False,False,False,,,,8.25,,Female,Black,30-49
+20533,0.05814948406171092,False,,0,,,False,False,False,False,,,,7.0,,Male,White,30-49
+20563,0.3910467362138933,True,1.0,1,0.5337605887935936,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Female,Black,30-49
+20634,0.45559135916502996,True,0.5,1,0.5277159135370617,hours_per_week: 12 -> 22,False,True,False,False,22.0,,,,,Female,White,50+
+20786,0.09373706832366802,False,,0,,,False,False,False,False,,,,6.5,,Male,Black,30-49
+20810,0.12362134383336809,True,4.25,3,0.5271837467662832,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov; occupation: Adm-clerical -> Prof-specialty,False,True,True,True,75.0,Federal-gov,Prof-specialty,,,Male,White,30-49
+20839,0.34398013343309347,True,1.0,1,0.5715050415233714,workclass: State-gov -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+20850,0.029337152345001706,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+20855,0.01548448122443632,False,,0,,,False,False,False,False,,,,9.0,,Male,White,30-49
+20985,0.2693775651866438,True,1.0,1,0.5199377580470944,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Female,White,50+
+21011,0.010451124196143823,False,,0,,,False,False,False,False,,,,10.0,,Female,White,50+
+21026,0.012284567880898422,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+21059,0.004406563987679168,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+21082,0.0616864830563171,True,3.75,3,0.5225115930696508,hours_per_week: 40 -> 65; workclass: Unknown -> Federal-gov; occupation: Unknown -> Exec-managerial,False,True,True,True,65.0,Federal-gov,Exec-managerial,,,Male,White,50+
+21094,0.3010677315038587,True,1.5,1,0.5062559971019591,hours_per_week: 30 -> 60,False,True,False,False,60.0,,,,,Male,White,50+
+21133,0.3904969869115822,True,1.0,1,0.5331858762771622,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,30-49
+21144,0.45439283157919375,True,0.5,1,0.5265111482742656,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+21171,0.2650938058348625,True,1.0,1,0.5144752197842088,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+21193,0.011548154268586719,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+21436,0.18031961416899664,True,1.5,1,0.5393414860395211,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,White,50+
+21446,0.03543110719551371,False,,0,,,False,False,False,False,,,,8.5,,Male,White,<30
+21530,0.31980095404240433,True,1.0,1,0.5800282819993967,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+21621,0.04948758961094188,False,,0,,,False,False,False,False,,,,8.5,,Male,White,50+
+21644,0.004494172071073683,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+21683,0.1510577046390959,True,2.75,2,0.5182305424503812,hours_per_week: 40 -> 75; workclass: Local-gov -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,White,<30
+21693,0.003042102279410453,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+21794,0.1017791922846732,True,6.0,3,0.5255340207804658,education_num: 9 -> 12; hours_per_week: 40 -> 70; occupation: Sales -> Exec-managerial,True,True,False,True,70.0,,Exec-managerial,,12.0,Female,White,50+
+21857,0.0627705400335939,True,6.0,3,0.5342581956419856,education_num: 13 -> 15; hours_per_week: 30 -> 80; occupation: Transport-moving -> Exec-managerial,True,True,False,True,80.0,,Exec-managerial,,15.0,Male,White,30-49
+21913,0.25532629926977385,True,1.5,1,0.5479070939808544,occupation: Unknown -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,White,30-49
+21994,0.49075989712005424,True,0.25,1,0.5268681002436771,hours_per_week: 45 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+22184,0.31667465924907323,True,1.5,1,0.52451725237361,hours_per_week: 20 -> 50,False,True,False,False,50.0,,,,,Female,Other,50+
+22311,0.30623212079383594,True,1.0,1,0.5645827318986206,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+22333,0.03206919802640839,True,6.0,3,0.5114787674257215,education_num: 12 -> 15; hours_per_week: 40 -> 70; occupation: Other-service -> Exec-managerial,True,True,False,True,70.0,,Exec-managerial,,15.0,Male,White,30-49
+22398,0.28672661039128994,True,1.5,1,0.5290226165052939,occupation: Machine-op-inspct -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+22403,0.006726105640949732,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+22484,0.06416043492990221,False,,0,,,False,False,False,False,,,,8.5,,Female,Other,50+
+22516,0.053048105807104264,False,,0,,,False,False,False,False,,,,7.5,,Female,White,30-49
+22621,0.04306356534183655,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+22626,0.005489469560762897,False,,0,,,False,False,False,False,,,,15.5,,Male,White,30-49
+22631,0.03435589098471892,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+22641,0.0045296125642490335,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+22647,0.03253013434645339,False,,0,,,False,False,False,False,,,,9.0,,Male,White,50+
+22785,0.0038267672703168197,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+22792,0.0023487405860502693,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+22826,0.053648524971612994,False,,0,,,False,False,False,False,,,,7.75,,Female,White,50+
+22855,0.4005145980127937,True,0.75,1,0.5075745524858578,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,30-49
+23097,0.14442211948617453,True,3.25,3,0.5034525086393564,education_num: 13 -> 14; hours_per_week: 50 -> 75; workclass: Local-gov -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,14.0,Female,White,30-49
+23121,0.008400494424798908,False,,0,,,False,False,False,False,,,,,,Male,White,50+
+23264,0.01127772568251618,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+23325,0.1463287651243411,True,4.25,3,0.5166194213231254,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov; occupation: Sales -> Prof-specialty,False,True,True,True,75.0,Federal-gov,Prof-specialty,,,Male,White,30-49
+23340,0.002187079457178936,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+23357,0.05945546800466251,False,,0,,,False,False,False,False,,,,6.5,,Female,White,30-49
+23408,0.06295093819546285,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+23533,0.08372823870482698,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+23591,0.1074722225254279,True,2.5,2,0.5412353935221305,workclass: Private -> Federal-gov; occupation: Other-service -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Female,Other,30-49
+23605,0.2766113400966903,True,1.5,1,0.516549822244168,occupation: Machine-op-inspct -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+23692,0.029255670073776493,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+23895,0.013047473168956485,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+23930,0.36221264765910277,True,1.0,1,0.5030972408045001,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,30-49
+23944,0.00048117586660357197,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+23946,0.047519588935562844,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+23973,0.1621731670794702,True,2.5,2,0.5031490653998756,hours_per_week: 40 -> 70; workclass: Local-gov -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Female,White,<30
+24113,0.37658987280754924,True,1.0,1,0.5185201968121553,hours_per_week: 43 -> 63,False,True,False,False,63.0,,,,,Male,White,30-49
+24135,0.0027622199380993658,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+24165,0.2698428807468113,True,1.75,1,0.5040910692727987,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+24376,0.001819357195123564,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+24417,0.005296765685020888,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+24741,0.09323761707594645,True,5.75,3,0.5322353550039333,education_num: 13 -> 16; hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,16.0,Male,White,<30
+24826,0.10197314651517658,False,,0,,,False,False,False,False,,,,6.5,,Female,White,30-49
+24866,0.17061738252805594,True,3.0,2,0.5219530585967417,hours_per_week: 44 -> 74; occupation: Adm-clerical -> Exec-managerial,False,True,False,True,74.0,,Exec-managerial,,,Female,White,30-49
+24888,0.004829004378566865,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+24915,0.24873906204776994,True,2.5,2,0.5232422425876229,workclass: Private -> Federal-gov; occupation: Transport-moving -> Protective-serv,False,False,True,True,,Federal-gov,Protective-serv,,,Male,White,30-49
+24921,0.0024596832549397796,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+24928,0.030180708360751443,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+25071,0.30200049210699154,True,1.5,1,0.5073629982650508,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Female,White,30-49
+25129,0.18074515518564255,True,2.5,2,0.5150907542054202,workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+25137,0.1961351127420622,True,2.5,2,0.5001870585014044,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,Other,30-49
+25170,0.04396753717067844,False,,0,,,False,False,False,False,,,,8.5,,Male,Black,30-49
+25217,0.20122500769940868,True,2.5,2,0.5043226590348341,workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Protective-serv,False,False,True,True,,Federal-gov,Protective-serv,,,Male,White,30-49
+25275,0.16484229376092177,True,3.0,2,0.519446586034475,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,Black,<30
+25355,0.29387450163345896,True,1.75,1,0.5337347583998117,hours_per_week: 20 -> 55,False,True,False,False,55.0,,,,,Male,White,50+
+25358,0.015415793434709555,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+25384,0.02702517138282514,False,,0,,,False,False,False,False,,,,7.5,,Female,White,50+
+25399,0.0010827127101101174,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+25428,0.0010431405263672555,False,,0,,,False,False,False,False,,,,,,Female,Other,50+
+25503,0.025202288701204556,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+25507,0.028431577052466378,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+25578,0.05451918154129905,False,,0,,,False,False,False,False,,,,7.75,,Female,White,30-49
+25662,0.0021972150327835096,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+25688,0.15287131474003882,True,3.25,2,0.5323355876806158,hours_per_week: 46 -> 81; occupation: Transport-moving -> Exec-managerial,False,True,False,True,81.0,,Exec-managerial,,,Male,White,30-49
+25738,0.011116838783605493,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+25813,0.40608985362467326,True,0.75,1,0.5133639030637261,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Female,White,30-49
+25835,0.1428295339929958,True,4.25,2,0.5185339467602932,education_num: 11 -> 13; hours_per_week: 30 -> 75,True,True,False,False,75.0,,,,13.0,Female,Other,30-49
+25852,0.006084972485777538,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+25992,0.015166027022982299,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+26043,0.13126678727526397,True,4.5,3,0.521701434735563,education_num: 13 -> 15; hours_per_week: 45 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Male,White,<30
+26068,0.017599361206352228,False,,0,,,False,False,False,False,,,,9.5,,Male,White,30-49
+26135,0.08568422807221895,False,,0,,,False,False,False,False,,,,7.25,,Male,White,50+
+26159,0.35687791556807125,True,1.0,1,0.5494771693933427,workclass: Local-gov -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,<30
+26218,0.39213939044761326,True,1.0,1,0.5349017350482096,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,30-49
+26225,0.10522819866316771,False,,0,,,False,False,False,False,,,,6.5,,Female,White,30-49
+26358,0.008613818800178365,False,,0,,,False,False,False,False,,,,11.5,,Male,Black,50+
+26366,0.0029863227483194455,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+26416,0.05640499597465961,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+26429,0.00610097823194391,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+26686,0.06291526285297311,False,,0,,,False,False,False,False,,,,7.0,,Male,White,<30
+26832,0.0061041943084693025,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+26914,0.49477772154254435,True,0.25,1,0.5308733664715473,hours_per_week: 45 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+26962,0.1296387435548291,True,3.0,2,0.5197322499818995,hours_per_week: 40 -> 80; workclass: Unknown -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Female,White,50+
+26979,0.01580850801580095,False,,0,,,False,False,False,False,,,,8.25,,Male,Black,30-49
+27058,0.03240385752642806,False,,0,,,False,False,False,False,,,,10.5,,Female,Other,50+
+27185,0.4067483873000987,True,0.75,1,0.5140458295581689,hours_per_week: 50 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+27265,0.002400291487896308,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+27313,0.0010002212488437444,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+27342,0.1033167176033205,False,,0,,,False,False,False,False,,,,7.0,,Male,Black,30-49
+27532,0.023116067061589918,False,,0,,,False,False,False,False,,,,7.25,,Male,White,<30
+27614,0.01938357729022011,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+27647,0.005877959768426853,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+27674,0.025108113779951938,True,5.25,3,0.5322331961637076,hours_per_week: 19 -> 74; workclass: Local-gov -> Federal-gov; occupation: Other-service -> Tech-support,False,True,True,True,74.0,Federal-gov,Tech-support,,,Female,White,50+
+27692,0.013510865729647535,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+27715,0.2565921374363252,True,2.0,1,0.523125524145973,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+27785,0.18411139208900626,True,2.75,2,0.516788546967284,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,<30
+27940,0.2439292002304638,True,2.0,1,0.5062667123569581,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,50+
+28000,0.35922162598437174,True,1.25,1,0.5359277538647829,hours_per_week: 36 -> 61,False,True,False,False,61.0,,,,,Female,White,30-49
+28020,0.24082648332464088,True,1.75,2,0.5182337993323046,hours_per_week: 44 -> 59; workclass: Local-gov -> Federal-gov,False,True,True,False,59.0,Federal-gov,,,,Male,White,30-49
+28176,0.20010654025807187,True,2.5,2,0.5064364065623808,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,30-49
+28267,0.059150222722085824,True,3.5,3,0.5233833610750465,hours_per_week: 40 -> 60; workclass: Private -> Federal-gov; occupation: Other-service -> Exec-managerial,False,True,True,True,60.0,Federal-gov,Exec-managerial,,,Male,Other,30-49
+28272,0.07865241667370777,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+28349,0.0011887162743178697,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+28412,0.004871601243159325,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+28439,0.23855114270301103,True,2.25,2,0.5187076558933142,hours_per_week: 40 -> 55; occupation: Adm-clerical -> Exec-managerial,False,True,False,True,55.0,,Exec-managerial,,,Male,White,30-49
+28442,0.005593885574463594,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+28451,0.006003681805423945,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+28500,0.07109893193685984,False,,0,,,False,False,False,False,,,,7.5,,Female,White,50+
+28501,0.2739408301610174,True,1.5,2,0.5254433062147122,hours_per_week: 50 -> 60; workclass: Local-gov -> Federal-gov,False,True,True,False,60.0,Federal-gov,,,,Female,Other,50+
+28512,0.4622946318110267,True,0.5,1,0.5344386203348254,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+28628,0.2945438482435446,True,1.75,1,0.5345368609883724,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+28638,0.34666223568130483,True,1.25,1,0.5222253205011144,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+28685,0.0023470880700157434,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+28822,0.21209773063677906,True,2.5,2,0.5247419677554293,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Female,White,30-49
+28927,0.1803858247228361,True,2.75,2,0.5105435936598289,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,Black,<30
+29001,0.4371405938861816,True,0.5,1,0.509075574435267,hours_per_week: 48 -> 58,False,True,False,False,58.0,,,,,Female,White,50+
+29007,0.03636658246494282,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+29297,0.09001674987208427,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+29469,0.003486170347760291,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+29492,0.01735022272227232,False,,0,,,False,False,False,False,,,,9.0,,Female,Other,<30
+29498,0.005402201858970234,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+29501,0.3394449420641233,True,1.25,1,0.5142297836965389,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+29532,0.09975062335219509,True,2.5,2,0.5013303391985731,workclass: Self-emp-not-inc -> Private; occupation: Farming-fishing -> Exec-managerial,False,False,True,True,,Private,Exec-managerial,,,Male,White,30-49
+29563,0.44967159249570965,True,0.5,1,0.5217571541096147,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+29704,0.16106808714727827,True,3.75,3,0.5339745114100398,education_num: 13 -> 15; hours_per_week: 60 -> 75; workclass: Local-gov -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Male,White,30-49
+29746,0.028649970544927354,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+29758,0.04358740178966337,False,,0,,,False,False,False,False,,,,7.5,,Female,White,30-49
+29803,0.012826685443237102,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+29833,0.0019465928896873154,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+29875,0.3818030096507114,True,1.0,1,0.5240464886305057,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Female,White,30-49
+29896,0.0023705665676706923,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+29940,0.017291193274354553,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+29969,0.20402678397129007,True,2.5,2,0.5524004443472446,workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+30016,0.2559373684941332,True,1.0,1,0.502595908337275,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,30-49
+30197,0.11777125863182382,True,3.25,2,0.5186558340313687,hours_per_week: 25 -> 70; workclass: Local-gov -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,50+
+30248,0.1760805219437908,True,2.75,1,0.5117017873081574,hours_per_week: 15 -> 70,False,True,False,False,70.0,,,,,Male,White,50+
+30297,0.4606601618444252,True,0.5,1,0.5328018242920197,hours_per_week: 56 -> 66,False,True,False,False,66.0,,,,,Male,White,30-49
+30386,0.242995747492171,True,2.0,1,0.5049998924209506,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,Black,50+
+30470,0.021078860378040336,False,,0,,,False,False,False,False,,,,10.5,,Female,White,30-49
+30533,0.02699588312760291,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+30539,0.01274850552660279,False,,0,,,False,False,False,False,,,,11.0,,Female,White,30-49
+30586,0.025480748839248252,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+30674,0.0012618482701663896,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+30736,0.054913373353110514,False,,0,,,False,False,False,False,,,,8.0,,Female,Black,30-49
+30766,0.0003146064660137426,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+30856,0.051778705082887254,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+30984,0.030603371067035697,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+31156,0.4731002466034874,True,0.25,1,0.5092083687573576,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,Black,<30
+31221,0.4465784016765309,True,0.5,1,0.5186354070538111,hours_per_week: 72 -> 82,False,True,False,False,82.0,,,,,Male,White,50+
+31363,0.465845720206508,True,0.25,1,0.5019276008530382,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,30-49
+31390,0.1608906325910459,True,3.0,2,0.5122077578886055,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,White,50+
+31421,0.1406033154837997,True,2.5,2,0.5335823649706121,hours_per_week: 30 -> 60; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,60.0,Federal-gov,,,,Male,White,30-49
+31436,0.06377810568365647,False,,0,,,False,False,False,False,,,,7.25,,Female,White,30-49
+31485,0.2860541153811032,True,1.75,2,0.5157766533938812,hours_per_week: 60 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,White,<30
+31554,0.45268533733412075,True,0.5,1,0.524793315809288,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+31589,0.023979661745020173,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+31591,0.04835004661807895,True,5.5,3,0.5011264573158655,education_num: 7 -> 9; hours_per_week: 40 -> 80; occupation: Unknown -> Exec-managerial,True,True,False,True,80.0,,Exec-managerial,,9.0,Female,Other,<30
+31652,0.2484055837963579,True,2.0,1,0.5122953094700543,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,50+
+31841,0.21327367073909606,True,2.5,2,0.5264930142772651,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,Black,50+
+31846,0.4160711845811182,True,0.75,1,0.5236571267441728,hours_per_week: 50 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+31918,0.32898586491968823,True,1.25,1,0.5024819324273467,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,Black,30-49
+31955,0.27073224174913973,True,1.5,1,0.5675129469983979,occupation: Unknown -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,Other,30-49
+32109,0.009195180116169047,False,,0,,,False,False,False,False,,,,14.5,,Male,White,50+
+32140,0.01795687879949322,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+32194,0.0318247396767961,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+32200,0.04734371332718812,False,,0,,,False,False,False,False,,,,8.0,,Female,White,<30
+32231,0.14430219168838973,True,2.25,2,0.5050677703042531,hours_per_week: 50 -> 75; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,50+
+32287,0.015661715963116676,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+32295,0.12254928514782665,True,4.0,3,0.5018815294053228,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov; occupation: Sales -> Exec-managerial,False,True,True,True,70.0,Federal-gov,Exec-managerial,,,Male,White,<30
+32396,0.11175168955155895,True,2.25,2,0.5081306441586481,hours_per_week: 40 -> 55; occupation: Farming-fishing -> Exec-managerial,False,True,False,True,55.0,,Exec-managerial,,,Male,White,<30
+32413,0.09972073518405589,True,4.0,3,0.5102583149717832,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov; occupation: Transport-moving -> Exec-managerial,False,True,True,True,70.0,Federal-gov,Exec-managerial,,,Male,Black,30-49
+32470,0.010701180530346648,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+32488,0.1656529309516267,True,3.25,2,0.5330031193394933,hours_per_week: 45 -> 80; occupation: Machine-op-inspct -> Prof-specialty,False,True,False,True,80.0,,Prof-specialty,,,Male,White,<30
+32557,0.14048193750217586,True,3.0,2,0.5208647919315683,hours_per_week: 40 -> 70; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,70.0,,Exec-managerial,,,Male,White,<30
+32661,0.13477845709164163,True,4.5,3,0.5292942533638072,education_num: 13 -> 15; hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,15.0,Female,White,30-49
+32780,0.2514880995272039,True,2.0,1,0.5164025451509954,hours_per_week: 10 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+32793,0.2501492745466649,True,2.0,1,0.5146230406825907,hours_per_week: 30 -> 70,False,True,False,False,70.0,,,,,Male,White,<30
+32807,0.10819219977696483,True,4.75,3,0.5029659316552824,education_num: 13 -> 15; hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Male,White,<30
+32809,0.00435130253071129,False,,0,,,False,False,False,False,,,,11.5,,Female,Other,30-49
+32865,0.0045113092850866295,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+32873,0.022794707943584847,False,,0,,,False,False,False,False,,,,,,Male,Black,30-49
+32970,0.1798504680500155,True,1.5,1,0.5549396729864917,occupation: Other-service -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,30-49
+32984,0.20122500769940868,True,2.25,2,0.5206190680646073,hours_per_week: 40 -> 55; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,55.0,,Exec-managerial,,,Male,White,30-49
+33157,0.022156468842681406,False,,0,,,False,False,False,False,,,,7.5,,Male,White,30-49
+33244,0.37346565233937834,True,1.0,1,0.5151915786072794,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,50+
+33308,0.13902266547117992,True,4.25,3,0.5316393762667055,hours_per_week: 45 -> 80; workclass: Self-emp-inc -> Federal-gov; occupation: Sales -> Exec-managerial,False,True,True,True,80.0,Federal-gov,Exec-managerial,,,Male,White,50+
+33414,0.002728708877888652,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+33474,0.18437766720135984,True,1.5,1,0.5624337560626292,occupation: Other-service -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,White,30-49
+33501,0.1790242511577144,True,2.75,2,0.5082352599523114,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,Other,30-49
+33559,0.051731161512789836,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+33568,0.31782804747494975,True,1.5,1,0.5258451003698179,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,50+
+33659,0.025294842379605827,True,5.0,3,0.5189944098097011,hours_per_week: 20 -> 70; workclass: Private -> Federal-gov; occupation: Other-service -> Exec-managerial,False,True,True,True,70.0,Federal-gov,Exec-managerial,,,Male,White,30-49
+33688,0.007229730503197524,False,,0,,,False,False,False,False,,,,12.0,,Female,White,50+
+33748,0.01016755966834561,False,,0,,,False,False,False,False,,,,,,Male,White,50+
+33756,0.046603810484548064,False,,0,,,False,False,False,False,,,,8.0,,Female,White,30-49
+33775,0.37085933941619015,True,1.0,1,0.5124050978434305,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Female,White,50+
+33862,0.08172985050971707,True,4.5,3,0.522743456555382,education_num: 10 -> 12; hours_per_week: 40 -> 70; workclass: Self-emp-not-inc -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,12.0,Female,Other,30-49
+33869,0.005392138420819574,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+34072,0.002661951829123576,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+34133,0.22024976919467282,True,2.0,2,0.513103639742265,hours_per_week: 36 -> 46; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,46.0,,Exec-managerial,,,Male,Other,30-49
+34177,0.19152724200046792,True,4.75,3,0.5029636317741267,education_num: 9 -> 12; hours_per_week: 60 -> 75; workclass: Private -> Self-emp-inc,True,True,True,False,75.0,Self-emp-inc,,,12.0,Female,White,50+
+34247,0.48075860418821836,True,0.25,1,0.5168778439115072,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,30-49
+34318,0.049661296401932654,True,6.0,3,0.5130082554826603,education_num: 9 -> 11; hours_per_week: 20 -> 80; workclass: Self-emp-not-inc -> Self-emp-inc,True,True,True,False,80.0,Self-emp-inc,,,11.0,Male,White,50+
+34322,0.3003355086191644,True,1.5,1,0.5053855824227517,hours_per_week: 44 -> 74,False,True,False,False,74.0,,,,,Male,White,50+
+34521,0.09611556870622269,True,4.5,3,0.5077575038248322,education_num: 14 -> 15; hours_per_week: 24 -> 74; workclass: Private -> Federal-gov,True,True,True,False,74.0,Federal-gov,,,15.0,Female,White,50+
+34576,0.018366408244133912,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+34632,0.020150858287033252,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+34634,0.026151155764963404,False,,0,,,False,False,False,False,,,,7.0,,Female,White,30-49
+34642,0.002820010220256753,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+34725,0.14763562932531177,True,1.75,2,0.5157820823218611,hours_per_week: 60 -> 65; occupation: Farming-fishing -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,30-49
+34839,0.29095341766542887,True,1.75,1,0.5302197398778951,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+34859,0.1856285971990686,True,2.75,2,0.5193023197913744,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,White,30-49
+34863,0.21647671098672586,True,2.5,2,0.5059705543853413,education_num: 9 -> 10; occupation: Machine-op-inspct -> Exec-managerial,True,False,False,True,,,Exec-managerial,,10.0,Male,Black,30-49
+34880,0.022582183882026208,True,5.5,3,0.5140358537013946,hours_per_week: 16 -> 76; workclass: Unknown -> Federal-gov; occupation: Unknown -> Exec-managerial,False,True,True,True,76.0,Federal-gov,Exec-managerial,,,Male,White,<30
+34912,0.010641784804951815,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+34951,0.009170990731013308,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+34973,0.008871534454187672,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+34975,0.001595642447167201,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+35038,0.00036357996268539917,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+35042,0.07704446735283962,False,,0,,,False,False,False,False,,,,6.5,,Female,White,30-49
+35068,0.013718612589935418,False,,0,,,False,False,False,False,,,,,,Male,White,50+
+35071,0.008635479247750334,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+35084,0.07890065410637138,False,,0,,,False,False,False,False,,,,6.5,,Female,White,30-49
+35207,0.017717706591876752,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+35208,0.1800111925094801,True,1.5,1,0.5552086805889469,occupation: Other-service -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Female,White,30-49
+35249,0.004950470127755144,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+35253,0.0009417286508395545,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+35316,0.03543083053225412,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+35319,0.09188367700577188,True,3.0,2,0.5288633667110131,hours_per_week: 8 -> 38; occupation: Handlers-cleaners -> Exec-managerial,False,True,False,True,38.0,,Exec-managerial,,,Male,Other,50+
+35354,0.006722723542962096,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+35448,0.029487068996003916,False,,0,,,False,False,False,False,,,,9.5,,Female,Other,30-49
+35486,0.01852530349157943,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+35515,0.006401868729029605,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+35608,0.032945041923302616,False,,0,,,False,False,False,False,,,,10.5,,Male,Black,30-49
+35815,0.009546454494325979,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+35823,0.20126748798339777,True,2.5,2,0.5082453434658164,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,Other,30-49
+35829,0.1709281756283849,True,2.25,2,0.5292616308891712,hours_per_week: 40 -> 55; occupation: Unknown -> Exec-managerial,False,True,False,True,55.0,,Exec-managerial,,,Male,White,50+
+35853,0.004480039754026223,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+35888,0.35787677660026673,True,1.25,2,0.5259967719948571,hours_per_week: 60 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,<30
+35925,0.3056727777301781,True,1.5,1,0.5117017873081574,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,50+
+36025,0.061842526201209926,False,,0,,,False,False,False,False,,,,8.25,,Female,Other,50+
+36092,0.13134497290728017,True,2.5,2,0.5970103196270293,workclass: Private -> Federal-gov; occupation: Other-service -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+36095,0.12807971677793847,True,2.5,2,0.5427399982722797,workclass: Unknown -> Federal-gov; occupation: Unknown -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,50+
+36118,0.0563024024457605,False,,0,,,False,False,False,False,,,,7.5,,Female,Black,30-49
+36265,0.11139245702728692,True,3.5,3,0.5183055690419757,hours_per_week: 40 -> 60; workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Exec-managerial,False,True,True,True,60.0,Federal-gov,Exec-managerial,,,Male,White,30-49
+36344,0.07945896318645712,True,6.0,3,0.52464737130805,education_num: 13 -> 16; hours_per_week: 40 -> 80; workclass: Private -> Federal-gov,True,True,True,False,80.0,Federal-gov,,,16.0,Male,White,<30
+36402,0.0352939901907649,False,,0,,,False,False,False,False,,,,9.5,,Female,White,30-49
+36405,0.05112335103790811,True,4.75,3,0.507282057755704,education_num: 13 -> 14; hours_per_week: 15 -> 70; workclass: Self-emp-not-inc -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,14.0,Male,White,30-49
+36419,0.001742558607448055,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+36466,0.10709014427733729,True,5.75,2,0.5053867110886814,education_num: 9 -> 13; hours_per_week: 40 -> 75,True,True,False,False,75.0,,,,13.0,Female,White,30-49
+36609,0.07659910633905478,True,4.5,2,0.5195457252436863,hours_per_week: 8 -> 78; workclass: Private -> Federal-gov,False,True,True,False,78.0,Federal-gov,,,,Female,White,50+
+36635,0.004457922651824034,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+36715,0.2775372898944293,True,1.5,1,0.5758869515955689,occupation: Unknown -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+36722,0.3883722264756317,True,1.0,1,0.5309610678812583,hours_per_week: 55 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+36769,0.48477829438865805,True,0.25,1,0.5208965714387246,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Female,White,30-49
+36780,0.1848738864978141,True,2.75,2,0.5180539896094101,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,Other,30-49
+36902,0.23456735062824652,True,1.5,1,0.6199125389525525,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,Other,30-49
+36912,0.033876608133785,False,,0,,,False,False,False,False,,,,9.0,,Female,White,30-49
+36934,0.004532201160603523,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+37026,0.0004267789792914918,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+37056,0.08615237629995094,True,3.5,2,0.5143462371520136,hours_per_week: 24 -> 64; occupation: Unknown -> Exec-managerial,False,True,False,True,64.0,,Exec-managerial,,,Male,Other,50+
+37101,0.38664919605462683,True,1.0,1,0.5291527341953353,hours_per_week: 57 -> 77,False,True,False,False,77.0,,,,,Male,White,30-49
+37136,0.3780524406314798,True,1.0,1,0.5200741339444227,hours_per_week: 40 -> 60,False,True,False,False,60.0,,,,,Male,White,<30
+37229,0.060995977391879896,False,,0,,,False,False,False,False,,,,6.5,,Male,White,50+
+37297,0.26961986564795387,True,2.0,2,0.531394222627061,hours_per_week: 50 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,30-49
+37340,0.025971060350761684,False,,0,,,False,False,False,False,,,,10.0,,Male,White,30-49
+37419,0.2802509843428295,True,1.75,1,0.5171351698791732,hours_per_week: 45 -> 80,False,True,False,False,80.0,,,,,Male,White,<30
+37466,0.296761292482163,True,1.5,1,0.5011188906552262,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,Black,30-49
+37630,0.019566329078993288,False,,0,,,False,False,False,False,,,,8.5,,Female,White,30-49
+37718,0.0009581422086298888,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+37755,0.01678415014681744,False,,0,,,False,False,False,False,,,,8.5,,Male,White,30-49
+37759,0.2605132354646648,True,2.0,1,0.528225572071973,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,Black,50+
+37777,0.041196201386381005,False,,0,,,False,False,False,False,,,,8.75,,Female,White,<30
+37788,0.006366805238112138,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+37892,0.013928584479221394,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+37941,0.007256404590886241,False,,0,,,False,False,False,False,,,,,,Male,Black,30-49
+37952,0.11660226829678055,True,2.5,2,0.5094448071667274,workclass: Self-emp-not-inc -> Federal-gov; occupation: Farming-fishing -> Craft-repair,False,False,True,True,,Federal-gov,Craft-repair,,,Male,White,50+
+37954,0.005909501598334326,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+37966,0.002312416343608679,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+38000,0.037302370012347125,True,5.25,3,0.5160947890396776,education_num: 13 -> 15; hours_per_week: 40 -> 75; occupation: Other-service -> Exec-managerial,True,True,False,True,75.0,,Exec-managerial,,15.0,Male,White,30-49
+38102,0.19368942076195392,True,1.5,1,0.528213530637162,occupation: Handlers-cleaners -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,Black,30-49
+38110,0.003997790896171623,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+38142,0.40351741999509316,True,0.75,1,0.5106962574119717,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,30-49
+38194,0.015034289157614185,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+38201,0.08001742733142268,True,4.25,3,0.5016755089066784,hours_per_week: 40 -> 75; workclass: Self-emp-not-inc -> Federal-gov; occupation: Craft-repair -> Tech-support,False,True,True,True,75.0,Federal-gov,Tech-support,,,Male,White,50+
+38210,0.05294128918721958,False,,0,,,False,False,False,False,,,,7.75,,Male,White,30-49
+38240,0.26353454566200535,True,1.5,1,0.5059175914081522,occupation: Other-service -> Craft-repair,False,False,False,True,,,Craft-repair,,,Female,Other,30-49
+38260,0.02691119344545095,False,,0,,,False,False,False,False,,,,8.0,,Male,White,30-49
+38467,0.2149392539679092,True,2.75,2,0.5284588875345769,hours_per_week: 40 -> 65; occupation: Craft-repair -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,30-49
+38472,0.18596550950917698,True,3.25,3,0.5182513790309443,education_num: 13 -> 14; hours_per_week: 45 -> 70; workclass: Private -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,14.0,Male,White,<30
+38489,0.21737814920279386,True,1.5,2,0.5213984964327143,hours_per_week: 40 -> 50; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,50.0,Federal-gov,,,,Female,Black,30-49
+38532,0.2656544877504362,True,1.5,1,0.5026933765756887,occupation: Machine-op-inspct -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+38645,0.14048193750217586,True,3.0,3,0.5123666956433557,hours_per_week: 40 -> 50; workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Exec-managerial,False,True,True,True,50.0,Federal-gov,Exec-managerial,,,Male,White,<30
+38685,0.09771034710543547,True,3.0,2,0.5019402548506933,hours_per_week: 40 -> 70; occupation: Handlers-cleaners -> Protective-serv,False,True,False,True,70.0,,Protective-serv,,,Male,Black,<30
+38714,0.22074691726912152,True,2.25,2,0.5060291532147271,hours_per_week: 40 -> 55; occupation: Machine-op-inspct -> Protective-serv,False,True,False,True,55.0,,Protective-serv,,,Male,Black,30-49
+38742,0.009450666489496558,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+38782,0.0014445828581547914,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+38876,0.137351888152074,True,4.5,3,0.5347448835691128,education_num: 12 -> 14; hours_per_week: 45 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,14.0,Male,Black,50+
+38905,0.013743550846957237,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+38940,0.020612863863869017,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+38991,0.08594316972401751,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+39034,0.054306248744625925,False,,0,,,False,False,False,False,,,,7.75,,Female,White,<30
+39063,0.22073241022383658,True,2.25,2,0.5013579176035581,hours_per_week: 40 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,30-49
+39101,0.022127450268790316,False,,0,,,False,False,False,False,,,,9.25,,Female,Black,30-49
+39120,0.1332013604115736,True,2.5,2,0.5524004443472446,workclass: Private -> Federal-gov; occupation: Handlers-cleaners -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+39129,0.0009376699314963363,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+39177,0.0005024844810861091,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+39181,0.2552608560610592,True,2.0,1,0.5213812370781539,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,Other,30-49
+39204,0.10785709066729596,True,5.25,3,0.5004872960406409,education_num: 10 -> 13; hours_per_week: 35 -> 60; workclass: Private -> Federal-gov,True,True,True,False,60.0,Federal-gov,,,13.0,Female,White,50+
+39223,0.23348237563881702,True,2.5,2,0.5462115978730263,workclass: Private -> Federal-gov; occupation: Transport-moving -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+39292,0.12362824605026106,True,2.5,2,0.5155309040749945,education_num: 15 -> 16; occupation: Other-service -> Exec-managerial,True,False,False,True,,,Exec-managerial,,16.0,Male,White,30-49
+39338,0.01964457461722972,False,,0,,,False,False,False,False,,,,10.0,,Female,White,30-49
+39449,0.02074321220987791,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+39521,0.016297148000825736,False,,0,,,False,False,False,False,,,,9.5,,Male,White,30-49
+39525,0.22620832294933635,True,1.5,1,0.6087424323423171,occupation: Farming-fishing -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+39545,0.0015563090501278232,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+39597,0.005779227038490607,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+39608,0.2359295453824047,True,1.5,2,0.5118867631316595,hours_per_week: 40 -> 50; workclass: State-gov -> Federal-gov,False,True,True,False,50.0,Federal-gov,,,,Male,White,50+
+39634,0.003899474592595493,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+39804,0.47795624010561455,True,0.25,1,0.514073384316407,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,30-49
+39838,0.018697246283278762,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+39975,0.353172586850596,True,1.25,1,0.5293613231675615,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+39992,0.12678227355863267,True,2.75,2,0.5138992616186888,hours_per_week: 40 -> 65; occupation: Unknown -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Female,White,50+
+40063,0.3020047633323729,True,1.5,1,0.5073680627319145,hours_per_week: 40 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+40092,0.001929375848677,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+40140,0.1642590909131479,True,3.0,2,0.5183875324290219,hours_per_week: 40 -> 80; workclass: Private -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Male,White,<30
+40240,0.0040589879456407645,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+40351,0.06062004947991479,False,,0,,,False,False,False,False,,,,8.5,,Female,Other,30-49
+40434,0.04937470681447899,False,,0,,,False,False,False,False,,,,8.0,,Male,White,30-49
+40472,0.34702230250825067,True,1.0,1,0.6095502845045605,workclass: Self-emp-not-inc -> Federal-gov,False,False,True,False,,Federal-gov,,,,Male,White,50+
+40515,0.003515780225892527,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+40521,0.002768057474832827,False,,0,,,False,False,False,False,,,,,,Female,White,50+
+40549,0.0218473464782044,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+40599,0.12142074444720706,True,2.5,2,0.527566763438998,workclass: Unknown -> Federal-gov; occupation: Unknown -> Exec-managerial,False,False,True,True,,Federal-gov,Exec-managerial,,,Male,White,30-49
+40680,0.12071805645215242,False,,0,,,False,False,False,False,,,,,,Female,Other,<30
+40739,0.012944382894539154,False,,0,,,False,False,False,False,,,,13.5,,Male,White,50+
+41041,0.051710295074792335,True,4.0,3,0.5119137641564002,hours_per_week: 24 -> 54; workclass: Unknown -> Federal-gov; occupation: Unknown -> Exec-managerial,False,True,True,True,54.0,Federal-gov,Exec-managerial,,,Female,Other,<30
+41142,0.00046302163605906586,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+41154,0.0010995167746103872,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+41156,0.03865758395356083,False,,0,,,False,False,False,False,,,,6.5,,Female,White,50+
+41244,0.003885388936236806,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+41300,0.38697343689994224,True,1.0,1,0.52949331342776,hours_per_week: 50 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+41380,0.00788240638698552,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+41396,0.00825121136022713,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+41608,0.2931651216735557,True,1.5,1,0.5368072025936164,occupation: Machine-op-inspct -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,50+
+41758,0.2698428807468113,True,1.75,1,0.5040910692727987,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+41795,0.27655128785132466,True,1.75,1,0.5125351620339337,hours_per_week: 25 -> 60,False,True,False,False,60.0,,,,,Male,Black,50+
+41844,0.04879251377672039,False,,0,,,False,False,False,False,,,,8.25,,Female,White,30-49
+41865,0.2169248470148484,True,2.5,2,0.5318811785652406,hours_per_week: 43 -> 73; workclass: Private -> Federal-gov,False,True,True,False,73.0,Federal-gov,,,,Male,White,<30
+41875,0.002533701374400844,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+41878,0.17716474162076623,True,2.0,2,0.5299796945280071,hours_per_week: 20 -> 40; workclass: Self-emp-not-inc -> Federal-gov,False,True,True,False,40.0,Federal-gov,,,,Male,White,50+
+41884,0.0030599034344332547,False,,0,,,False,False,False,False,,,,,,Male,Black,<30
+41897,0.05403863051434897,False,,0,,,False,False,False,False,,,,7.5,,Female,Black,30-49
+41950,0.002407812454851881,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+42069,0.000577424794292552,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+42141,0.15189090117472068,True,4.0,2,0.5004418274176493,education_num: 13 -> 15; hours_per_week: 40 -> 80,True,True,False,False,80.0,,,,15.0,Female,Black,<30
+42172,0.0030641979139404744,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+42199,0.1778824550795649,True,2.75,2,0.506288642222274,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Female,White,30-49
+42204,0.4022174970885551,True,0.75,1,0.509345895371884,hours_per_week: 45 -> 60,False,True,False,False,60.0,,,,,Male,White,30-49
+42249,0.013663243092327524,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+42262,0.009543376274355782,False,,0,,,False,False,False,False,,,,10.75,,Female,White,50+
+42298,0.4404657473516888,True,0.5,1,0.5124497333795406,hours_per_week: 50 -> 60,False,True,False,False,60.0,,,,,Male,White,<30
+42325,0.23798614473632748,True,2.25,2,0.5257478888562838,hours_per_week: 40 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,30-49
+42343,0.003138946758655291,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+42347,0.03991315835650289,False,,0,,,False,False,False,False,,,,8.75,,Female,White,30-49
+42388,0.09414001721173908,False,,0,,,False,False,False,False,,,,6.5,,Male,White,30-49
+42429,0.006632085092738288,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+42454,0.4720571747177255,True,0.25,1,0.508162465840139,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,Other,30-49
+42475,0.07477994297237309,True,5.5,3,0.5332749584580515,education_num: 10 -> 13; hours_per_week: 40 -> 70; workclass: State-gov -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,13.0,Female,White,50+
+42547,0.2615950753343881,True,2.0,1,0.5296229187943668,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Female,White,30-49
+42571,0.00912684139356794,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+42586,0.42239474588257225,True,0.75,1,0.5301313319886187,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,Other,<30
+42607,0.37861761567485014,True,1.0,1,0.520673881300432,hours_per_week: 50 -> 70,False,True,False,False,70.0,,,,,Male,White,<30
+42673,0.08138225899679119,False,,0,,,False,False,False,False,,,,6.75,,Female,White,30-49
+42725,0.027469512970365064,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+42762,0.3260983497312314,True,1.5,1,0.5352809486862761,hours_per_week: 45 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+42777,0.000500040374505609,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+42833,0.014015732257634828,False,,0,,,False,False,False,False,,,,,,Female,Black,50+
+42921,0.001871591184019811,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+42930,0.014235314463375394,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+43068,0.33152933240748883,True,1.25,1,0.5053565449577604,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+43070,0.04636510788411406,False,,0,,,False,False,False,False,,,,8.0,,Male,White,30-49
+43115,0.02188058998044211,False,,0,,,False,False,False,False,,,,11.5,,Male,White,30-49
+43136,0.09886263239036461,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+43137,0.005740370672135659,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+43243,0.0012575017880047906,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+43267,0.0035297170171725736,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+43346,0.012623416847654334,False,,0,,,False,False,False,False,,,,8.5,,Male,White,30-49
+43560,0.19923525998599073,True,2.5,2,0.5050735276934226,hours_per_week: 45 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,<30
+43584,0.03572604689697833,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+43633,0.3214061552904586,True,1.5,1,0.5299457915459277,hours_per_week: 42 -> 72,False,True,False,False,72.0,,,,,Female,White,<30
+43714,0.2453551939003433,True,2.75,3,0.5341611809588406,education_num: 14 -> 15; hours_per_week: 60 -> 75; workclass: Private -> Federal-gov,True,True,True,False,75.0,Federal-gov,,,15.0,Male,Other,<30
+43735,0.29092405679629785,True,1.75,1,0.5301842882549332,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Female,Black,30-49
+43758,0.16087514249647808,True,3.0,1,0.5206773966449973,hours_per_week: 18 -> 78,False,True,False,False,78.0,,,,,Male,White,<30
+43834,0.4056109389169238,True,0.75,1,0.512867725113367,hours_per_week: 55 -> 70,False,True,False,False,70.0,,,,,Male,White,30-49
+43841,0.0018914422630515284,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+43909,0.026903804069092242,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+43975,0.4146774598984948,True,0.75,1,0.5222253205011144,hours_per_week: 50 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+44092,0.4830506261366974,True,0.25,1,0.5191698895739922,hours_per_week: 40 -> 45,False,True,False,False,45.0,,,,,Male,White,30-49
+44119,0.45300819178839885,True,0.5,1,0.5251182559031798,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+44132,0.007688084448306399,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+44273,0.011128962279051649,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+44286,0.13954057703357836,True,4.25,3,0.5032531828079646,education_num: 9 -> 11; hours_per_week: 43 -> 68; workclass: Private -> Federal-gov,True,True,True,False,68.0,Federal-gov,,,11.0,Female,White,50+
+44315,0.009806678748333377,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+44366,0.1860734086080397,True,4.25,2,0.5237091295817478,education_num: 13 -> 16; hours_per_week: 55 -> 80,True,True,False,False,80.0,,,,16.0,Male,White,30-49
+44403,0.12844221076727638,True,5.0,3,0.5138526199415723,education_num: 13 -> 16; hours_per_week: 45 -> 65; workclass: Private -> Federal-gov,True,True,True,False,65.0,Federal-gov,,,16.0,Female,White,<30
+44462,0.47147588903635346,True,0.25,1,0.5075794652997546,hours_per_week: 45 -> 50,False,True,False,False,50.0,,,,,Male,White,30-49
+44555,0.023789372913054007,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+44579,0.28135207444038896,True,1.75,1,0.5184964987596222,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+44593,0.26643982928394944,True,2.0,1,0.5358294757830061,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+44610,0.4518072949409479,True,0.5,1,0.5239092923195836,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,<30
+44959,0.40501767797541066,True,0.75,1,0.5122527858792753,hours_per_week: 60 -> 75,False,True,False,False,75.0,,,,,Male,White,30-49
+44962,0.23797650990801242,True,1.75,2,0.5143250334454386,hours_per_week: 40 -> 55; workclass: Local-gov -> Federal-gov,False,True,True,False,55.0,Federal-gov,,,,Female,White,50+
+44984,0.19071074608254135,True,2.75,2,0.527601355490752,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov,False,True,True,False,75.0,Federal-gov,,,,Male,White,<30
+44997,0.3383993792573907,True,1.25,1,0.5130640107267295,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,50+
+45035,0.0007071063347931637,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+45145,0.05807282064468008,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+45165,0.007402190376540581,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+45395,0.0826995992583541,True,6.0,3,0.5224896806917783,education_num: 11 -> 15; hours_per_week: 56 -> 76; workclass: Local-gov -> Federal-gov,True,True,True,False,76.0,Federal-gov,,,15.0,Male,White,30-49
+45525,0.02720964888286593,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+45546,0.3237065594204329,True,1.5,2,0.5240872010993347,hours_per_week: 55 -> 65; workclass: Private -> Federal-gov,False,True,True,False,65.0,Federal-gov,,,,Male,White,30-49
+45550,0.07484870608109559,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+45624,0.0012858413834335618,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+45629,0.1943143619645815,True,2.25,2,0.5097393366497973,hours_per_week: 50 -> 65; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,65.0,,Exec-managerial,,,Male,White,<30
+45640,0.0009698192115704657,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+45658,0.005969559478210734,False,,0,,,False,False,False,False,,,,,,Male,Other,30-49
+45679,0.08760266901256236,False,,0,,,False,False,False,False,,,,6.75,,Female,White,30-49
+45755,0.027556799013815404,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+45787,0.21625465682049333,True,2.5,2,0.530897629463443,hours_per_week: 50 -> 80; workclass: Private -> Federal-gov,False,True,True,False,80.0,Federal-gov,,,,Female,White,30-49
+45877,0.026871619272959595,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+45884,0.04533213097445832,False,,0,,,False,False,False,False,,,,8.5,,Male,White,<30
+46012,0.01984024104758091,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+46088,0.0034428721037431838,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+46192,0.4437874819688384,True,0.5,1,0.5158138855685976,hours_per_week: 30 -> 40,False,True,False,False,40.0,,,,,Female,White,50+
+46276,0.04301905032108047,False,,0,,,False,False,False,False,,,,,,Male,White,30-49
+46295,0.45416153342860205,True,0.5,1,0.5262785496336552,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,Black,30-49
+46338,0.12361295720888023,True,2.5,2,0.6138654093916407,workclass: Self-emp-not-inc -> Federal-gov; occupation: Farming-fishing -> Tech-support,False,False,True,True,,Federal-gov,Tech-support,,,Male,Other,50+
+46341,0.0014344331134548054,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+46419,0.32397086478808473,True,1.5,1,0.5235855193796908,occupation: Transport-moving -> Exec-managerial,False,False,False,True,,,Exec-managerial,,,Male,White,30-49
+46420,0.030439969349930845,False,,0,,,False,False,False,False,,,,8.75,,Male,White,30-49
+46447,0.007140411361179024,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+46467,0.04261356724584124,True,4.25,3,0.5015376212632696,hours_per_week: 40 -> 75; workclass: Private -> Federal-gov; occupation: Other-service -> Protective-serv,False,True,True,True,75.0,Federal-gov,Protective-serv,,,Male,White,<30
+46532,0.012554182416010123,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+46533,0.24859921588825976,True,2.0,1,0.5125543638299069,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,30-49
+46560,0.17075007959857552,True,4.0,3,0.5267899888217492,education_num: 13 -> 15; hours_per_week: 50 -> 70; workclass: Private -> Federal-gov,True,True,True,False,70.0,Federal-gov,,,15.0,Male,White,<30
+46613,0.05631951441546617,False,,0,,,False,False,False,False,,,,7.25,,Male,Black,30-49
+46649,0.33317005043261816,True,1.25,1,0.5072047972739008,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,Black,<30
+46678,0.18817874479786997,True,2.0,2,0.5224387238315213,hours_per_week: 38 -> 48; occupation: Unknown -> Exec-managerial,False,True,False,True,48.0,,Exec-managerial,,,Male,White,50+
+46688,0.4266166576399001,True,0.75,1,0.534433729701267,hours_per_week: 40 -> 55,False,True,False,False,55.0,,,,,Male,White,30-49
+46767,0.09449214576540335,True,6.0,2,0.5067305360511414,education_num: 12 -> 16; hours_per_week: 40 -> 80,True,True,False,False,80.0,,,,16.0,Male,White,30-49
+46798,0.0008707004590537697,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+46829,0.005279282117586741,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+46936,0.17456011282973571,True,2.5,2,0.5130150635315314,hours_per_week: 40 -> 60; occupation: Machine-op-inspct -> Exec-managerial,False,True,False,True,60.0,,Exec-managerial,,,Male,White,<30
+47028,0.06147975758225717,False,,0,,,False,False,False,False,,,,7.25,,Female,White,50+
+47053,0.035709468971519304,False,,0,,,False,False,False,False,,,,8.5,,Female,White,<30
+47064,0.23596967493649157,True,2.25,2,0.5229665376349394,hours_per_week: 45 -> 70; workclass: Private -> Federal-gov,False,True,True,False,70.0,Federal-gov,,,,Male,White,30-49
+47101,0.4526513672515901,True,0.5,1,0.5247591227294397,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+47129,0.003971225167254354,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+47340,0.34574877799403547,True,1.25,1,0.5212183127464112,hours_per_week: 40 -> 65,False,True,False,False,65.0,,,,,Male,White,30-49
+47375,0.0010598410852317292,False,,0,,,False,False,False,False,,,,,,Female,Black,<30
+47382,0.003710009303240346,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+47405,0.004516625666080699,False,,0,,,False,False,False,False,,,,13.25,,Female,White,50+
+47410,0.0021949365188823444,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+47536,0.0795645073900316,True,6.0,3,0.5250069987699717,education_num: 13 -> 16; hours_per_week: 37 -> 77; workclass: Private -> Federal-gov,True,True,True,False,77.0,Federal-gov,,,16.0,Male,White,<30
+47622,0.006983146060915944,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+47644,0.031179039314762052,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+47765,0.01642346721281921,False,,0,,,False,False,False,False,,,,,,Female,White,30-49
+47778,0.14048193750217586,True,3.0,3,0.5123666956433557,hours_per_week: 40 -> 50; workclass: Private -> Federal-gov; occupation: Machine-op-inspct -> Exec-managerial,False,True,True,True,50.0,Federal-gov,Exec-managerial,,,Male,White,<30
+47870,0.28710616630553504,True,1.75,1,0.5255537352543824,hours_per_week: 40 -> 75,False,True,False,False,75.0,,,,,Male,White,<30
+47902,0.08243937985531198,True,3.5,3,0.5205356087720867,hours_per_week: 40 -> 60; workclass: Unknown -> Federal-gov; occupation: Unknown -> Protective-serv,False,True,True,True,60.0,Federal-gov,Protective-serv,,,Male,White,50+
+47963,0.25863505252004815,True,2.0,1,0.5257896324569423,hours_per_week: 40 -> 80,False,True,False,False,80.0,,,,,Male,White,50+
+47972,0.016626377769066863,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+48038,0.019787667976178855,False,,0,,,False,False,False,False,,,,,,Female,Other,30-49
+48068,0.04329729084548283,False,,0,,,False,False,False,False,,,,8.0,,Female,Other,30-49
+48095,0.0014572349496876967,False,,0,,,False,False,False,False,,,,,,Male,White,50+
+48166,0.010807371360143102,False,,0,,,False,False,False,False,,,,,,Male,Black,30-49
+48199,0.022089988015244033,False,,0,,,False,False,False,False,,,,,,Male,Other,<30
+48228,0.12181984766404105,True,4.0,3,0.5001813005208312,hours_per_week: 40 -> 70; workclass: Private -> Federal-gov; occupation: Sales -> Exec-managerial,False,True,True,True,70.0,Federal-gov,Exec-managerial,,,Female,White,50+
+48256,0.013883165420963092,False,,0,,,False,False,False,False,,,,,,Male,White,<30
+48266,0.1484211579413402,True,3.0,2,0.5282567694116059,hours_per_week: 30 -> 70; workclass: Self-emp-not-inc -> Self-emp-inc,False,True,True,False,70.0,Self-emp-inc,,,,Male,Other,30-49
+48384,0.0023837819255828874,False,,0,,,False,False,False,False,,,,,,Female,Black,30-49
+48523,0.0198125649660747,False,,0,,,False,False,False,False,,,,10.75,,Male,Other,30-49
+48525,0.004034168776609347,False,,0,,,False,False,False,False,,,,,,Female,White,50+
+48671,0.45864657323539393,True,0.5,1,0.5307832328588737,hours_per_week: 40 -> 50,False,True,False,False,50.0,,,,,Male,White,50+
+48687,0.007394528310785699,False,,0,,,False,False,False,False,,,,,,Female,White,<30
+48765,0.1289104561066463,True,5.0,2,0.5233908615530666,education_num: 10 -> 13; hours_per_week: 40 -> 80,True,True,False,False,80.0,,,,13.0,Female,White,30-49
