@@ -4,17 +4,27 @@
 # flips a denial into an approval. Everything below controls what "feasible" and
 # "cheap" mean. Costs are in abstract effort units; compare them across groups,
 # not in absolute terms.
+#
+# Every feature is classified as one of:
+#   immutable  - the applicant cannot (or should not be told to) change it
+#   monotonic  - can change in one direction only (e.g. education only goes up)
+#   bounded    - can change in either direction, within realistic limits
+# Each entry carries a one-line justification. These are design choices, not facts;
+# edit them and re-run to see how the audit's conclusions depend on them.
 
 data:
   source: adult            # "adult" (OpenML, cached to data/raw/) or "synthetic"
   target: income
   positive_label: ">50K"   # favourable outcome (the model's "approve")
-  drop: [fnlwgt, education] # education is redundant with education_num
+  drop:
+    - fnlwgt               # census sampling weight, describes the survey, not the person
+    - education            # text duplicate of education_num
   test_size: 0.3
   seed: 42
 
 # Attributes used to slice the audit. They are NOT model inputs unless
 # use_protected_in_model is true (proxies such as relationship still are).
+# Because they are never model inputs, recourse can never recommend changing them.
 protected_attributes: [sex, race_group, age_group]
 use_protected_in_model: false
 
@@ -22,35 +32,50 @@ model:
   kinds: [logistic, gbm]   # any of: logistic, gbm
   threshold: 0.5
 
-# Features that can never be changed by the individual.
-immutable: [age, marital_status, relationship, native_country, capital_gain, capital_loss]
+# IMMUTABLE: features the individual cannot change, or that it would be unethical
+# for an agency to recommend changing.
+immutable:
+  - age                    # cannot be changed; "wait N years" is not actionable recourse
+  - marital_status         # advising someone to marry or divorce to qualify is unethical
+  - relationship           # household role; follows from marital status and is a proxy for sex
+  - native_country         # place of birth is fixed
+  - capital_gain           # depends on existing wealth; not a realistic action for a denied applicant
+  - capital_loss           # same as capital_gain
 
 actionable:
   numeric:
+    # MONOTONIC: schooling can be added but a completed degree cannot be undone.
     education_num:
       direction: increase  # increase | decrease | any
       min: 1
-      max: 16
-      step: 1
-      cost_per_unit: 1.0   # one extra year of schooling = 1 unit
+      max: 16              # 16 = doctorate, the top of Adult's education scale
+      step: 1              # one year of schooling at a time
+      cost_per_unit: 1.0   # one extra year of schooling = 1 unit (the reference cost)
+    # BOUNDED: hours can go up or down, within what a person can realistically work.
     hours_per_week:
-      direction: any
+      direction: any       # people can take on more hours or cut back
       min: 1
-      max: 80
-      step: 5
-      cost_per_unit: 0.05  # 20 extra hours/week = 1 unit
+      max: 80              # roughly two full-time jobs; beyond this is not a realistic ask
+      step: 5              # shifts are scheduled in blocks, not single hours
+      cost_per_unit: 0.05  # 20 extra hours/week = 1 unit, i.e. half a full-time job ~ a year of school
   categorical:
+    # BOUNDED (categorical): switching sector or occupation is possible but takes effort.
     workclass:
-      cost: 1.0
-      exclude: [Unknown, Never-worked, Without-pay]
+      cost: 1.0            # changing employer type (e.g. private -> government) ~ a year of school
+      exclude:             # target values recourse may never recommend:
+        - Unknown          # missing data, not a real option
+        - Never-worked     # never a step toward approval
+        - Without-pay      # never a step toward approval
     occupation:
-      cost: 1.5
-      exclude: [Unknown, Armed-Forces]
+      cost: 1.5            # changing occupation usually means retraining, so costlier than changing sector
+      exclude:
+        - Unknown          # missing data, not a real option
+        - Armed-Forces     # enlistment is not an appropriate recommendation, and the category is tiny
 
 recourse:
   n_candidates: 1000       # random multi-feature candidates per individual
-  max_features_changed: 3
-  max_cost: 6.0            # beyond this budget we say "no recourse"
+  max_features_changed: 3  # more than 3 simultaneous life changes is not a realistic plan
+  max_cost: 6.0            # beyond this budget we say "no recourse" (~6 years of school)
   sample_size: 800         # denied test individuals to audit (null = all)
   min_group_size: 100      # top up each protected group to at least this many
   seed: 42

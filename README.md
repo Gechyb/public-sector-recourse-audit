@@ -84,6 +84,18 @@ public-sector-recourse-audit/
 
 ## Usage
 
+Requires Python 3.10+ and `make`. After cloning:
+
+```bash
+make setup    # create .venv, install requirements, download the data
+make quick    # smoke test (~15 s)
+make audit    # full audit (a few minutes)
+make app      # interactive Streamlit explorer
+make help     # list all targets
+```
+
+Or manually, without `make`:
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
