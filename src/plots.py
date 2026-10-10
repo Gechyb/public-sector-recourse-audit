@@ -190,3 +190,64 @@ def plot_violation_types(types: pd.DataFrame, path: Path, model_name: str, top: 
     fig.tight_layout()
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)
+
+
+def plot_budget_curves(curves: pd.DataFrame, path: Path, model_name: str, budget: float | None = None):
+    """Recourse rate as the allowed cost grows: does the gap close with more effort?"""
+    attrs = list(dict.fromkeys(curves["attribute"]))
+    fig, axes = plt.subplots(1, len(attrs), figsize=(3.8 * len(attrs), 3.0), sharey=True)
+    axes = np.atleast_1d(axes)
+    for ax, attr in zip(axes, attrs):
+        d = curves[curves["attribute"] == attr]
+        order = AGE_ORDER if attr == "age_group" else sorted(d["group"].unique())
+        for k, grp in enumerate([o for o in order if o in set(d["group"])]):
+            s = d[d["group"] == grp]
+            ax.plot(s["budget"], s["recourse_rate"], color=SERIES[k], linewidth=2, label=grp)
+            ax.text(s["budget"].iloc[-1], s["recourse_rate"].iloc[-1], f" {grp}",
+                    va="center", color=INK_2, fontsize=8.5)
+        if budget is not None:
+            ax.axvline(budget, color=INK_2, linewidth=1, linestyle="--")
+            ax.text(budget, 0.02, " audit budget", color=INK_2, fontsize=8, va="bottom")
+        ax.set_title(LABELS.get(attr, attr))
+        ax.set_xlabel("allowed recourse cost (effort units)")
+        ax.set_ylim(0, 1.02)
+        ax.set_xlim(0, d["budget"].max() * 1.18)
+        ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0))
+        ax.legend(loc="upper left", frameon=False, fontsize=8)
+    axes[0].set_ylabel("denied applicants with recourse")
+    fig.suptitle(f"Recourse rate as the allowed effort grows ({model_name})",
+                 x=0.01, ha="left", fontsize=12, fontweight="bold")
+    fig.tight_layout()
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
+
+
+GAP_LABELS = {"recourse_rate_gap": "raw gap",
+              "recourse_rate_gap_same_start": "same starting distance"}
+
+
+def plot_gaps(gaps: pd.DataFrame, path: Path, model_name: str,
+              metrics=("recourse_rate_gap", "recourse_rate_gap_same_start")):
+    """Forest plot: each group's recourse-rate gap vs its reference group, with
+    95% bootstrap CIs, raw and at the same starting distance from approval."""
+    d = gaps[gaps["metric"].isin(metrics)]
+    rows = list(dict.fromkeys(zip(d["attribute"], d["group"], d["reference"])))
+    fig, ax = plt.subplots(figsize=(6.6, 0.55 * len(rows) + 1.3))
+    y = np.arange(len(rows))[::-1]
+    off = 0.32 / max(len(metrics) - 1, 1)
+    for k, m in enumerate(metrics):
+        s = d[d["metric"] == m].set_index(["attribute", "group", "reference"]).reindex(rows)
+        yk = y + 0.16 - k * off
+        ax.errorbar(s["estimate"], yk, xerr=[s["estimate"] - s["ci_low"], s["ci_high"] - s["estimate"]],
+                    fmt="o", color=SERIES[k], markersize=6, elinewidth=2, capsize=0,
+                    markeredgecolor=SURFACE, markeredgewidth=1.5, label=GAP_LABELS.get(m, m))
+    ax.axvline(0, color=INK_2, linewidth=1)
+    ax.set_yticks(y, [f"{g} vs {r}" for _, g, r in rows])
+    ax.grid(axis="y", visible=False)
+    ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v * 100:+.0f} pp"))
+    ax.set_xlabel("difference in recourse rate (percentage points, 95% CI)")
+    ax.legend(loc="lower right", frameon=False, fontsize=8)
+    ax.set_title(f"Who is less likely to have recourse? ({model_name})")
+    fig.tight_layout()
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)

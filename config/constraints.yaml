@@ -81,6 +81,19 @@ recourse:
   min_group_size: 100      # top up each protected group to at least this many
   seed: 42
 
+# STATISTICAL ANALYSIS of the audit results.
+analysis:
+  reference_groups:        # each group is compared against these (largest groups)
+    sex: Male
+    race_group: White
+    age_group: 30-49
+  n_bootstrap: 1000        # resamples for the 95% confidence intervals
+  distance_bins: 5         # quantile bands of starting approval probability; gaps are
+                           # re-estimated within bands to control for how far each
+                           # group starts from the decision boundary
+  budget_max: 12.0         # recourse-vs-budget curves run from 0 to this cost
+  budget_step: 0.25
+
 # UNCONSTRAINED BASELINE: what an off-the-shelf counterfactual tool does (in the
 # spirit of Wachter et al. 2017 and DiCE). Every model input may change, in any
 # direction, within its observed range. Cost is plain L1 distance: numeric changes

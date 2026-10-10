@@ -89,11 +89,12 @@ def audit_model(kind: str, cfg: dict, data) -> pd.DataFrame:
 
     # Unconstrained baseline on the same applicants: how often does an
     # off-the-shelf search recommend something the constraints forbid?
-    vio_groups, vio_types = [], []
+    vio_groups, vio_types, uncon_recs = [], [], {}
     for variant, freeze in cfg["unconstrained"]["variants"].items():
         print(f"  unconstrained recourse ({variant})")
         uncon = RecourseSearch.from_config(model, cfg, X_train, mode="unconstrained", freeze=freeze)
         u = metrics.constraint_violations(uncon.run(X_test.loc[idx]), X_test, cfg)
+        uncon_recs[variant] = u
         u.join(g_test).to_csv(PROCESSED_DIR / f"recourse_unconstrained_{variant}_{kind}.csv")
         vio_groups.append(metrics.violations_by_group(u, g).assign(variant=variant))
         vio_types.append(metrics.violation_type_counts(u).assign(variant=variant))
@@ -108,6 +109,24 @@ def audit_model(kind: str, cfg: dict, data) -> pd.DataFrame:
     vio_types.to_csv(PROCESSED_DIR / f"violation_types_{kind}.csv", index=False)
     plots.plot_violation_rate(vio_groups, FIGURES_DIR / f"violation_rate_{kind}.png", kind)
     plots.plot_violation_types(vio_types, FIGURES_DIR / f"violation_types_{kind}.png", kind)
+
+    # Is each gap real (bootstrap CI), does it close with more effort (budget
+    # curves), and does it survive comparing people at the same starting point?
+    an = cfg["analysis"]
+    rec_core = rec.drop(columns=g.columns)
+    budgets = np.round(np.arange(0, an["budget_max"] + 1e-9, an["budget_step"]), 4)
+    curves = metrics.budget_curves(rec_core, g, budgets)
+    curves.to_csv(PROCESSED_DIR / f"budget_curves_{kind}.csv", index=False)
+    plots.plot_budget_curves(curves, FIGURES_DIR / f"budget_curves_{kind}.png", kind, rc["max_cost"])
+    gaps = metrics.group_gaps(rec_core, g, an["reference_groups"], n_bins=an["distance_bins"],
+                              n_boot=an["n_bootstrap"], seed=rc["seed"], unconstrained=uncon_recs)
+    gaps.to_csv(PROCESSED_DIR / f"group_gaps_{kind}.csv", index=False)
+    plots.plot_gaps(gaps, FIGURES_DIR / f"group_gaps_{kind}.png", kind)
+    show = gaps[gaps["metric"].isin(["recourse_rate_gap", "recourse_rate_gap_same_start"])]
+    print("  recourse-rate gaps vs reference group (95% bootstrap CI):")
+    for _, r in show.iterrows():
+        print(f"    {r['group']:>7} vs {r['reference']:<6} {r['metric']:<29} "
+              f"{r['estimate']:+.3f} [{r['ci_low']:+.3f}, {r['ci_high']:+.3f}]{' *' if r['significant'] else ''}")
     return pd.DataFrame([overall])
 
 
@@ -124,6 +143,7 @@ def main():
         cfg["recourse"]["sample_size"] = args.sample_size
     if args.quick:
         cfg["recourse"].update(sample_size=60, min_group_size=10, n_candidates=200)
+        cfg["analysis"]["n_bootstrap"] = 200
 
     PROCESSED_DIR, FIGURES_DIR = output_dirs(cfg)
     X, y, groups = prepare(cfg)

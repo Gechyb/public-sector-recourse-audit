@@ -136,11 +136,18 @@ For each dataset (`adult`, `acs_nc_2023`) and model `{m}`, in `data/processed/<d
 | `recourse_unconstrained_{variant}_{m}.csv` | unconstrained baseline per applicant, with the constraints each recommendation breaks |
 | `violations_by_group_{m}.csv` | unconstrained recourse rate and violation rate per group, per variant |
 | `violation_types_{m}.csv` | how often each constraint (e.g. `immutable:marital_status`) is broken |
+| `budget_curves_{m}.csv` | share of each group with recourse at every budget from 0 to 12 |
+| `group_gaps_{m}.csv` | each group vs its reference group (Male, White, 30-49): recourse-rate, same-starting-distance, cost, and violation-rate gaps with 95% bootstrap CIs |
 
 The matching figures in `figures/<dataset>/` are `recourse_rate_{m}.png`,
 `recourse_mean_cost_{m}.png`, `recourse_cost_dist_{m}.png`,
 `feature_changes_{m}.png`, `false_negative_rate_{m}.png`, `violation_rate_{m}.png`,
-and `violation_types_{m}.png`.
+`violation_types_{m}.png`, `budget_curves_{m}.png`, and `group_gaps_{m}.png`.
+
+**Same starting distance.** A group can have less recourse simply because its members
+start further from approval. `group_gaps` also compares each group with reference-group
+members in the same band of starting approval probability (5 quantile bands, weighted by
+the group's own mix). A gap that survives this is not explained by starting distance.
 
 The unconstrained baseline (config section `unconstrained`) mimics off-the-shelf
 counterfactual tools: every model input may change, cost is standardised L1 distance,
