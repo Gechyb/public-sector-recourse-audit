@@ -116,3 +116,85 @@ def test_recourse_is_deterministic(model, cfg, splits):
     a = RecourseSearch.from_config(model, cfg, X_train).explain(x)
     b = RecourseSearch.from_config(model, cfg, X_train).explain(x)
     assert a["changes"] == b["changes"] and a["cost"] == b["cost"]
+
+
+# --- unconstrained baseline and violations ----------------------------------
+
+from src.metrics import constraint_violations  # noqa: E402
+
+
+@pytest.fixture(scope="session")
+def both_modes(model, cfg, splits):
+    """Constrained and unconstrained recourse for the same denied applicants."""
+    X_train, X_test, *_ = splits
+    proba = pd.Series(model.predict_proba(X_test)[:, 1], index=X_test.index)
+    denied = proba[proba < cfg["model"]["threshold"]].sort_values()
+    idx = denied.index[np.linspace(0, len(denied) - 1, N_APPLICANTS).astype(int)]
+    out = {}
+    for mode in ("constrained", "unconstrained"):
+        search = RecourseSearch.from_config(model, cfg, X_train, mode=mode)
+        out[mode] = constraint_violations(search.run(X_test.loc[idx], verbose=False), X_test, cfg)
+    return out
+
+
+def test_constrained_recourse_has_no_violations(both_modes):
+    assert (both_modes["constrained"]["n_violations"] == 0).all()
+
+
+def test_unconstrained_finds_at_least_as_much_recourse(both_modes):
+    assert both_modes["unconstrained"]["found"].sum() >= both_modes["constrained"]["found"].sum()
+
+
+def test_unconstrained_recourse_flips_decision(both_modes, model, cfg, splits):
+    X_test, dtypes = splits[1], splits[0].dtypes
+    rec = both_modes["unconstrained"]
+    for idx, r in rec[rec["found"]].iterrows():
+        cf = X_test.loc[idx].copy()
+        for f in X_test.columns:
+            if f"cf_{f}" in r and pd.notna(r[f"cf_{f}"]):
+                cf[f] = r[f"cf_{f}"]
+        assert model.predict_proba(cf.to_frame().T.astype(dtypes))[:, 1][0] >= cfg["model"]["threshold"]
+
+
+def test_violation_checker_flags_each_rule(cfg, splits):
+    """Hand-built counterfactuals: one per rule type, plus a clean one."""
+    X_test = splits[1]
+    i = X_test.index[(X_test["education_num"] > 5) & (X_test["workclass"] == "Private")][0]
+    x = X_test.loc[i]
+    other_marital = next(v for v in X_test["marital_status"].unique() if v != x["marital_status"])
+    rec = pd.DataFrame([
+        {"found": True, "cf_marital_status": other_marital},           # immutable
+        {"found": True, "cf_education_num": x["education_num"] - 1},  # direction
+        {"found": True, "cf_hours_per_week": 95},                     # bounds
+        {"found": True, "cf_workclass": "Without-pay"},               # excluded
+        {"found": True, "cf_education_num": x["education_num"] + 1},  # allowed
+        {"found": False},
+    ], index=[i] * 6)
+    got = constraint_violations(rec, X_test, cfg)["violations"].tolist()
+    assert got == ["immutable:marital_status", "direction:education_num",
+                   "bounds:hours_per_week", "excluded:workclass", "", ""]
+
+
+def test_frozen_features_never_change(model, cfg, splits):
+    X_train, X_test, *_ = splits
+    proba = model.predict_proba(X_test)[:, 1]
+    rows = X_test[proba < cfg["model"]["threshold"]].iloc[:N_APPLICANTS]
+    frozen = ["capital_gain", "capital_loss"]
+    search = RecourseSearch.from_config(model, cfg, X_train, mode="unconstrained", freeze=frozen)
+    assert not set(frozen) & set(search.space.features)
+    rec = search.run(rows, verbose=False)
+    for f in frozen:
+        assert f"cf_{f}" not in rec or rec[f"cf_{f}"].isna().all()
+
+
+def test_violation_summaries_are_consistent(both_modes, splits):
+    from src.metrics import violation_type_counts, violations_by_group
+    rec = both_modes["unconstrained"]
+    groups = splits[5].loc[rec.index]
+    by_group = violations_by_group(rec, groups)
+    assert by_group["violation_rate"].dropna().between(0, 1).all()
+    # every attribute's groups partition the same applicants
+    assert (by_group.groupby("attribute")["n_denied_audited"].sum() == len(rec)).all()
+    types = violation_type_counts(rec)
+    n_labels = sum(len([t for t in v.split("; ") if t]) for v in rec.loc[rec["found"], "violations"])
+    assert types["count"].sum() == n_labels

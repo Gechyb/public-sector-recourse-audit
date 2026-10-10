@@ -79,3 +79,21 @@ recourse:
   sample_size: 800         # denied test individuals to audit (null = all)
   min_group_size: 100      # top up each protected group to at least this many
   seed: 42
+
+# UNCONSTRAINED BASELINE: what an off-the-shelf counterfactual tool does (in the
+# spirit of Wachter et al. 2017 and DiCE). Every model input may change, in any
+# direction, within its observed range. Cost is plain L1 distance: numeric changes
+# are divided by the feature's standard deviation, each categorical change costs 1.
+# No budget; same max_features_changed as above so sparsity is comparable.
+# Comparing its recommendations against the rules above gives the violation rate.
+unconstrained:
+  numeric_step:            # grid spacing for the search, per numeric feature
+    age: 1
+    education_num: 1
+    hours_per_week: 5
+    capital_gain: 1000
+    capital_loss: 100
+  exclude: [Unknown]       # missing-data codes are never a recommendation
+  variants:                # robustness check: features held fixed in each variant
+    all_features: []       # pure off-the-shelf behaviour
+    no_capital: [capital_gain, capital_loss]  # rules out "just get capital gains"

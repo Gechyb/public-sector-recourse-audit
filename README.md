@@ -116,16 +116,25 @@ For each model `{m}` in `data/processed/`:
 
 | File | Contents |
 |---|---|
-| `model_summary.csv` | accuracy, AUC, approval rate, overall recourse rate and cost |
+| `model_summary.csv` | accuracy, AUC, approval rate, overall recourse rate and cost, unconstrained recourse and violation rates |
 | `group_performance_{m}.csv` | approval / error rates per group |
 | `recourse_individual_{m}.csv` | one row per audited denied applicant, with the recommended changes |
 | `recourse_by_group_{m}.csv` | recourse rate and cost per group |
 | `recourse_disparities_{m}.csv` | gaps and ratios between best- and worst-off groups |
 | `feature_changes_{m}.csv` | share of recourse actions using each feature, per group |
+| `recourse_unconstrained_{variant}_{m}.csv` | unconstrained baseline per applicant, with the constraints each recommendation breaks |
+| `violations_by_group_{m}.csv` | unconstrained recourse rate and violation rate per group, per variant |
+| `violation_types_{m}.csv` | how often each constraint (e.g. `immutable:marital_status`) is broken |
 
 The matching figures in `figures/` are `recourse_rate_{m}.png`,
 `recourse_mean_cost_{m}.png`, `recourse_cost_dist_{m}.png`,
-`feature_changes_{m}.png`, and `false_negative_rate_{m}.png`.
+`feature_changes_{m}.png`, `false_negative_rate_{m}.png`, `violation_rate_{m}.png`,
+and `violation_types_{m}.png`.
+
+The unconstrained baseline (config section `unconstrained`) mimics off-the-shelf
+counterfactual tools: every model input may change, cost is standardised L1 distance,
+and there is no budget. It runs in two variants, with all features mutable and with
+capital gain/loss held fixed, so that the violation rate is not driven by one feature.
 
 ## Limitations
 

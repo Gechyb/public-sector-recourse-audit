@@ -84,6 +84,28 @@ def audit_model(kind: str, cfg: dict, data) -> pd.DataFrame:
     overall.update(n_denied=len(denied), n_audited=len(idx),
                    recourse_rate=rec["found"].mean(),
                    mean_cost=rec.loc[rec["found"], "cost"].mean())
+
+    # Unconstrained baseline on the same applicants: how often does an
+    # off-the-shelf search recommend something the constraints forbid?
+    vio_groups, vio_types = [], []
+    for variant, freeze in cfg["unconstrained"]["variants"].items():
+        print(f"  unconstrained recourse ({variant})")
+        uncon = RecourseSearch.from_config(model, cfg, X_train, mode="unconstrained", freeze=freeze)
+        u = metrics.constraint_violations(uncon.run(X_test.loc[idx]), X_test, cfg)
+        u.join(g_test).to_csv(PROCESSED_DIR / f"recourse_unconstrained_{variant}_{kind}.csv")
+        vio_groups.append(metrics.violations_by_group(u, g).assign(variant=variant))
+        vio_types.append(metrics.violation_type_counts(u).assign(variant=variant))
+        found = u[u["found"]]
+        rate = (found["n_violations"] > 0).mean()
+        print(f"    recourse rate={u['found'].mean():.3f}  violation rate={rate:.3f}")
+        overall.update({f"uncon_recourse_rate_{variant}": u["found"].mean(),
+                        f"violation_rate_{variant}": rate})
+    vio_groups = pd.concat(vio_groups, ignore_index=True)
+    vio_types = pd.concat(vio_types, ignore_index=True)
+    vio_groups.to_csv(PROCESSED_DIR / f"violations_by_group_{kind}.csv", index=False)
+    vio_types.to_csv(PROCESSED_DIR / f"violation_types_{kind}.csv", index=False)
+    plots.plot_violation_rate(vio_groups, FIGURES_DIR / f"violation_rate_{kind}.png", kind)
+    plots.plot_violation_types(vio_types, FIGURES_DIR / f"violation_types_{kind}.png", kind)
     return pd.DataFrame([overall])
 
 

@@ -79,3 +79,69 @@ def feature_change_rates(rec: pd.DataFrame, groups: pd.DataFrame, features: list
             rows.append({"attribute": attr, "group": g, "n_with_recourse": len(d),
                          **{f: d[f"changed_{f}"].mean() for f in features}})
     return pd.DataFrame(rows)
+
+
+def constraint_violations(rec: pd.DataFrame, X: pd.DataFrame, cfg: dict) -> pd.DataFrame:
+    """Check each recommended counterfactual against the constraints in the config.
+
+    ``rec`` is RecourseSearch.run output (with ``cf_<feature>`` columns) and ``X``
+    holds the original rows. Adds ``n_violations`` and ``violations`` (e.g.
+    "immutable:marital_status; direction:education_num") for rows with recourse.
+    """
+    numeric = cfg["actionable"].get("numeric", {})
+    categorical = cfg["actionable"].get("categorical", {})
+    out = rec.copy()
+    labels = []
+    for idx, r in rec.iterrows():
+        v = []
+        if r["found"]:
+            x = X.loc[idx]
+            for f in X.columns:
+                col = f"cf_{f}"
+                if col not in r or pd.isna(r[col]) or r[col] == x[f]:
+                    continue
+                new = r[col]
+                if f in numeric:
+                    s = numeric[f]
+                    if not s["min"] <= float(new) <= s["max"]:
+                        v.append(f"bounds:{f}")
+                    if (s["direction"] == "increase" and float(new) < float(x[f])) or \
+                       (s["direction"] == "decrease" and float(new) > float(x[f])):
+                        v.append(f"direction:{f}")
+                elif f in categorical:
+                    if new in categorical[f].get("exclude", []):
+                        v.append(f"excluded:{f}")
+                else:  # immutable, or not declared actionable at all
+                    v.append(f"immutable:{f}")
+        labels.append(v)
+    out["n_violations"] = [len(v) for v in labels]
+    out["violations"] = ["; ".join(v) for v in labels]
+    return out
+
+
+def violations_by_group(rec: pd.DataFrame, groups: pd.DataFrame) -> pd.DataFrame:
+    """Per group: how often unconstrained recourse is found, and how often what it
+    recommends breaks the constraints. ``rec`` is constraint_violations output."""
+    df = rec.join(groups, how="left")
+    rows = []
+    for attr in groups.columns:
+        for g, d in df.groupby(attr):
+            found = d[d["found"]]
+            types = pd.Series([t.split(":")[1] for v in found["violations"] for t in v.split("; ") if t])
+            rows.append({
+                "attribute": attr, "group": g, "n_denied_audited": len(d),
+                "recourse_rate": d["found"].mean(),
+                # share of recommendations that ask for something not allowed
+                "violation_rate": (found["n_violations"] > 0).mean() if len(found) else np.nan,
+                "top_violated_feature": types.mode()[0] if len(types) else "",
+            })
+    return pd.DataFrame(rows)
+
+
+def violation_type_counts(rec: pd.DataFrame) -> pd.DataFrame:
+    """How often each (rule, feature) violation appears among found recommendations."""
+    found = rec[rec["found"]]
+    types = pd.Series([t for v in found["violations"] for t in v.split("; ") if t])
+    out = types.value_counts().rename_axis("violation").reset_index(name="count")
+    out["share_of_recommendations"] = out["count"] / max(len(found), 1)
+    return out

@@ -125,3 +125,68 @@ def plot_feature_changes(changes: pd.DataFrame, features: list[str], path: Path,
     fig.tight_layout()
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)
+
+
+VARIANT_LABELS = {"all_features": "all features mutable",
+                  "no_capital": "capital gain/loss held fixed"}
+
+
+def plot_violation_rate(vio: pd.DataFrame, path: Path, model_name: str):
+    """Grouped bars: share of unconstrained recommendations that break a constraint,
+    per group, one bar per robustness variant."""
+    variants = list(dict.fromkeys(vio["variant"]))
+    attrs = list(dict.fromkeys(vio["attribute"]))
+    fig, axes = plt.subplots(1, len(attrs), figsize=(3.8 * len(attrs), 3.0), sharex=True)
+    axes = np.atleast_1d(axes)
+    h = 0.8 / len(variants)
+    for ax, attr in zip(axes, attrs):
+        base = _ordered(vio[(vio["attribute"] == attr) & (vio["variant"] == variants[0])], attr)
+        order = list(base["group"])
+        y = np.arange(len(order))[::-1]
+        for k, var in enumerate(variants):
+            d = vio[(vio["attribute"] == attr) & (vio["variant"] == var)].set_index("group").reindex(order)
+            yk = y + (len(variants) - 1) * h / 2 - k * h
+            ax.barh(yk, d["violation_rate"], height=h, color=SERIES[k], edgecolor=SURFACE,
+                    linewidth=2, label=VARIANT_LABELS.get(var, var))
+            for yi, v in zip(yk, d["violation_rate"]):
+                ax.text(v, yi, f" {v:.0%}", va="center", color=INK, fontsize=8)
+        ax.set_yticks(y, order)
+        ax.set_title(LABELS.get(attr, attr))
+        ax.set_xlim(0, 1.15)
+        ax.grid(axis="y", visible=False)
+        ax.set_xlabel("recommendations breaking a constraint")
+        ax.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0))
+    fig.suptitle(f"Unconstrained recourse: how often it asks for something not allowed ({model_name})",
+                 x=0.01, ha="left", fontsize=12, fontweight="bold")
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=len(variants),
+               frameon=False, fontsize=8.5)
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_violation_types(types: pd.DataFrame, path: Path, model_name: str, top: int = 8):
+    """Which constraints unconstrained recourse breaks, per robustness variant."""
+    variants = list(dict.fromkeys(types["variant"]))
+    keep = (types.groupby("violation")["share_of_recommendations"].max()
+            .sort_values(ascending=False).index[:top])
+    fig, ax = plt.subplots(figsize=(6.4, 0.42 * len(keep) * len(variants) + 1.2))
+    y = np.arange(len(keep))[::-1]
+    h = 0.8 / len(variants)
+    for k, var in enumerate(variants):
+        d = types[types["variant"] == var].set_index("violation").reindex(keep)["share_of_recommendations"].fillna(0)
+        yk = y + (len(variants) - 1) * h / 2 - k * h
+        ax.barh(yk, d, height=h, color=SERIES[k], edgecolor=SURFACE, linewidth=2,
+                label=VARIANT_LABELS.get(var, var))
+        for yi, v in zip(yk, d):
+            ax.text(v, yi, f" {v:.0%}", va="center", color=INK, fontsize=8)
+    ax.set_yticks(y, [v.replace(":", ": ").replace("_", " ") for v in keep])
+    ax.set_xlim(0, 1.1)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("share of unconstrained recommendations")
+    ax.xaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0))
+    ax.legend(loc="lower right", frameon=False, fontsize=8)
+    ax.set_title(f"What unconstrained recourse asks people to change ({model_name})")
+    fig.tight_layout()
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)

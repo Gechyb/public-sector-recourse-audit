@@ -68,6 +68,26 @@ class ActionSpace:
             raise ValueError(f"Features marked both actionable and immutable: {bad}")
         return cls(numeric, categorical)
 
+    @classmethod
+    def unconstrained(cls, cfg: dict, X: pd.DataFrame, freeze=()) -> "ActionSpace":
+        """Baseline mimicking off-the-shelf counterfactual tools: every model input
+        (except those in ``freeze``) is mutable in any direction within its observed
+        range; cost is L1 distance with numeric features scaled by their std."""
+        spec = cfg["unconstrained"]
+        exclude = set(spec.get("exclude", []))
+        numeric, categorical = {}, {}
+        for f in X.columns:
+            if f in freeze:
+                continue
+            if pd.api.types.is_numeric_dtype(X[f]):
+                numeric[f] = NumericAction(direction="any", min=float(X[f].min()),
+                                           max=float(X[f].max()), step=spec["numeric_step"][f],
+                                           cost_per_unit=1.0 / float(X[f].std()))
+            else:
+                categorical[f] = CategoricalAction(cost=1.0,
+                                                   categories=sorted(set(X[f].unique()) - exclude))
+        return cls(numeric, categorical)
+
     def options(self, x: pd.Series) -> dict[str, np.ndarray]:
         spec = {**self.numeric, **self.categorical}
         return {f: spec[f].values(x[f]) for f in self.features}
@@ -104,11 +124,21 @@ class RecourseSearch:
         self.rng = np.random.default_rng(seed)
 
     @classmethod
-    def from_config(cls, model, cfg: dict, X: pd.DataFrame) -> "RecourseSearch":
+    def from_config(cls, model, cfg: dict, X: pd.DataFrame,
+                    mode: str = "constrained", freeze=()) -> "RecourseSearch":
+        """``mode="constrained"`` uses the action space in the config;
+        ``mode="unconstrained"`` uses the off-the-shelf baseline with no budget,
+        holding the features in ``freeze`` fixed."""
         r = cfg["recourse"]
-        return cls(model, ActionSpace.from_config(cfg, X), X.dtypes,
+        if mode == "constrained":
+            space, max_cost = ActionSpace.from_config(cfg, X), r["max_cost"]
+        elif mode == "unconstrained":
+            space, max_cost = ActionSpace.unconstrained(cfg, X, freeze), None
+        else:
+            raise ValueError(f"Unknown mode: {mode!r}")
+        return cls(model, space, X.dtypes,
                    threshold=cfg["model"]["threshold"], n_candidates=r["n_candidates"],
-                   max_features_changed=r["max_features_changed"], max_cost=r["max_cost"],
+                   max_features_changed=r["max_features_changed"], max_cost=max_cost,
                    seed=r["seed"])
 
     def _proba(self, df: pd.DataFrame) -> np.ndarray:
