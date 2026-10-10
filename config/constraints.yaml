@@ -13,7 +13,8 @@
 # edit them and re-run to see how the audit's conclusions depend on them.
 
 data:
-  source: adult            # "adult" (OpenML, cached to data/raw/) or "synthetic"
+  name: adult              # results go to data/processed/<name>/ and figures/<name>/
+  source: adult            # "adult" (OpenML, cached to data/raw/), "acs", or "synthetic"
   target: income
   positive_label: ">50K"   # favourable outcome (the model's "approve")
   drop:

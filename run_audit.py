@@ -3,6 +3,7 @@
     python run_audit.py                      # full audit, all models in the config
     python run_audit.py --models logistic    # one model
     python run_audit.py --quick              # small sample, for a smoke test
+    python run_audit.py --config config/constraints_acs_nc.yaml   # ACS North Carolina
 """
 from __future__ import annotations
 
@@ -13,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 from src import metrics, plots
-from src.data_loader import FIGURES_DIR, PROCESSED_DIR, load_config, prepare
+from src.data_loader import load_config, output_dirs, prepare
 from src.model import evaluate, split, train
 from src.recourse import RecourseSearch
 
@@ -41,6 +42,7 @@ def audit_model(kind: str, cfg: dict, data) -> pd.DataFrame:
     X_train, X_test, y_train, y_test, g_train, g_test = data
     thr = cfg["model"]["threshold"]
     rc = cfg["recourse"]
+    PROCESSED_DIR, FIGURES_DIR = output_dirs(cfg)
     print(f"\n=== {kind} ===")
 
     model = train(kind, X_train, y_train, seed=cfg["data"]["seed"])
@@ -123,11 +125,9 @@ def main():
     if args.quick:
         cfg["recourse"].update(sample_size=60, min_group_size=10, n_candidates=200)
 
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-
+    PROCESSED_DIR, FIGURES_DIR = output_dirs(cfg)
     X, y, groups = prepare(cfg)
-    print(f"Loaded {len(X)} rows, {X.shape[1]} model features; positive rate {y.mean():.3f}")
+    print(f"[{cfg['data']['name']}] Loaded {len(X)} rows, {X.shape[1]} model features; positive rate {y.mean():.3f}")
     data = split(X, y, groups, cfg)
 
     summary = pd.concat([audit_model(k, cfg, data) for k in (args.models or cfg["model"]["kinds"])])

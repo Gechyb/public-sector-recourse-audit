@@ -219,7 +219,7 @@ __marimo__/
 
 # Project data
 data/raw/
-data/processed/*.joblib
+data/processed/**/*.joblib
 
 # doc
 doc/

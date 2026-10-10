@@ -1,0 +1,84 @@
+# Audit configuration for ACS North Carolina (folktables), the modern counterpart
+# to config/constraints.yaml (UCI Adult, 1994).
+#
+# The data is recoded to Adult's column names (see src/data_loader.py), and the
+# recourse rules below match the Adult config wherever the feature exists, so the
+# two audits differ only in the data. Feature types and justifications are the same:
+#   immutable  - the applicant cannot (or should not be told to) change it
+#   monotonic  - can change in one direction only
+#   bounded    - can change in either direction, within realistic limits
+
+data:
+  name: acs_nc_2023        # results go to data/processed/<name>/ and figures/<name>/
+  source: acs              # ACS PUMS via folktables, cached to data/raw/
+  state: NC
+  year: 2023               # most recent 1-year PUMS at the time of writing
+  # ACSIncome's standard label (Ding et al. 2021): personal income > $50,000.
+  # It is NOT inflation-adjusted: Adult's 1994 $50K is ~$105K in 2023 dollars, so
+  # far more people are "approved" here (~44% vs ~24%).
+  income_threshold: 50000
+  target: income
+  positive_label: above    # favourable outcome (the model's "approve")
+  drop:
+    - pincp                # the income itself; the label is derived from it
+  test_size: 0.3
+  seed: 42
+
+protected_attributes: [sex, race_group, age_group]
+use_protected_in_model: false
+
+model:
+  kinds: [logistic, gbm]
+  threshold: 0.5
+
+# IMMUTABLE. ACSIncome has no capital gain/loss columns.
+immutable:
+  - age                    # cannot be changed; "wait N years" is not actionable recourse
+  - marital_status         # advising someone to marry or divorce to qualify is unethical
+  - relationship           # household role; follows from marital status and is a proxy for sex
+  - native_country         # place of birth (world region) is fixed
+
+actionable:
+  numeric:
+    # MONOTONIC: schooling can be added but a completed degree cannot be undone.
+    education_num:
+      direction: increase
+      min: 1
+      max: 16              # 16 = doctorate (ACS SCHL recoded to Adult's scale)
+      step: 1
+      cost_per_unit: 1.0   # one extra education level = 1 unit (the reference cost)
+    # BOUNDED: hours can go up or down, within what a person can realistically work.
+    hours_per_week:
+      direction: any
+      min: 1
+      max: 80              # roughly two full-time jobs; beyond this is not a realistic ask
+      step: 5
+      cost_per_unit: 0.05  # 20 extra hours/week = 1 unit
+  categorical:
+    workclass:
+      cost: 1.0            # changing employer type ~ a year of school
+      exclude:
+        - Without-pay      # never a step toward approval
+        - Unemployed       # never a step toward approval
+    occupation:
+      cost: 1.5            # changing occupation usually means retraining
+      exclude:
+        - Military         # enlistment is not an appropriate recommendation
+        - Unemployed       # never a step toward approval
+
+recourse:
+  n_candidates: 1000
+  max_features_changed: 3
+  max_cost: 6.0
+  sample_size: 800
+  min_group_size: 100
+  seed: 42
+
+unconstrained:
+  numeric_step:
+    age: 1
+    education_num: 1
+    hours_per_week: 5
+  exclude: []
+  variants:
+    all_features: []       # no capital columns here, so one variant is enough

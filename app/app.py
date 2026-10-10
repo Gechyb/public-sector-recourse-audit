@@ -15,7 +15,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.data_loader import FIGURES_DIR, PROCESSED_DIR, load_config, prepare  # noqa: E402
+from src.data_loader import load_config, output_dirs, prepare  # noqa: E402
 from src.model import split, train  # noqa: E402
 from src.recourse import RecourseSearch  # noqa: E402
 
@@ -32,7 +32,7 @@ def get_data():
 @st.cache_resource(show_spinner="Training model...")
 def get_model(kind: str):
     cfg, (X_train, _, y_train, *_rest) = get_data()
-    saved = PROCESSED_DIR / f"model_{kind}.joblib"
+    saved = output_dirs(cfg)[0] / f"model_{kind}.joblib"
     if saved.exists():
         import joblib
         return joblib.load(saved)
@@ -95,6 +95,7 @@ with tab_ind:
                    ". Actionable: " + ", ".join(search.space.features) + ".")
 
 with tab_audit:
+    PROCESSED_DIR, FIGURES_DIR = output_dirs(cfg)
     path = PROCESSED_DIR / f"recourse_by_group_{kind}.csv"
     if not path.exists():
         st.info("Run `python run_audit.py` first to generate the group audit.")

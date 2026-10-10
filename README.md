@@ -16,6 +16,12 @@ have similar error rates across groups and still give some groups a far harder
   in eligibility screening. The favourable outcome ("approved") is `income > 50K`.
   If OpenML is unreachable, the loader falls back to a schema-compatible synthetic
   dataset with deliberately injected disparities. Only use that fallback for testing.
+- **Modern replication:** ACS 2023 North Carolina (56,486 workers), downloaded with
+  [folktables](https://github.com/socialfoundations/folktables) using the ACSIncome
+  definition (Ding et al. 2021). It is recoded to Adult's column names, and the same
+  recourse rules apply wherever a feature exists
+  ([`config/constraints_acs_nc.yaml`](config/constraints_acs_nc.yaml)). This asks
+  whether gaps found on the 1994 benchmark still hold in current data.
 - **Models:** logistic regression and gradient boosting (`HistGradientBoostingClassifier`).
   Sex and race are **excluded** from model inputs by default
   (`use_protected_in_model: false`), as most public agencies are required to do.
@@ -112,7 +118,7 @@ budget), edit `config/constraints.yaml` and re-run.
 
 ## Outputs
 
-For each model `{m}` in `data/processed/`:
+For each dataset (`adult`, `acs_nc_2023`) and model `{m}`, in `data/processed/<dataset>/`:
 
 | File | Contents |
 |---|---|
@@ -126,7 +132,7 @@ For each model `{m}` in `data/processed/`:
 | `violations_by_group_{m}.csv` | unconstrained recourse rate and violation rate per group, per variant |
 | `violation_types_{m}.csv` | how often each constraint (e.g. `immutable:marital_status`) is broken |
 
-The matching figures in `figures/` are `recourse_rate_{m}.png`,
+The matching figures in `figures/<dataset>/` are `recourse_rate_{m}.png`,
 `recourse_mean_cost_{m}.png`, `recourse_cost_dist_{m}.png`,
 `feature_changes_{m}.png`, `false_negative_rate_{m}.png`, `violation_rate_{m}.png`,
 and `violation_types_{m}.png`.

@@ -13,6 +13,7 @@ VENV   := .venv
 PY     := $(VENV)/bin/python
 PIP    := $(VENV)/bin/pip
 STAMP  := $(VENV)/.installed
+CONFIGS := config/constraints.yaml config/constraints_acs_nc.yaml
 
 .DEFAULT_GOAL := help
 .PHONY: help setup install data test verify quick audit app clean clean-all
@@ -34,8 +35,10 @@ $(STAMP): requirements.txt | $(VENV)/bin/python
 
 install: $(STAMP)  ## Create .venv and install requirements.txt
 
-data: $(STAMP)  ## Download UCI Adult from OpenML into data/raw/ (cached)
-	$(PY) -c "from src.data_loader import load_adult; df = load_adult(); print('data/raw/adult.csv:', df.shape)"
+data: $(STAMP)  ## Download UCI Adult and ACS North Carolina into data/raw/ (cached)
+	@for c in $(CONFIGS); do \
+		$(PY) -c "from src.data_loader import load_config, load_raw; c = load_config('$$c'); print(c['data']['name'], load_raw(c).shape)" || exit 1; \
+	done
 
 test: $(STAMP)  ## Run the automated correctness tests
 	$(PY) -m pytest tests -q
@@ -43,11 +46,11 @@ test: $(STAMP)  ## Run the automated correctness tests
 verify: $(STAMP)  ## Print a readable walkthrough: data, model, recourse examples
 	$(PY) scripts/verify.py
 
-quick: $(STAMP)  ## Smoke test: tiny end-to-end run (~15 s)
-	$(PY) run_audit.py --quick
+quick: $(STAMP)  ## Smoke test: tiny end-to-end run on both datasets (~30 s)
+	@for c in $(CONFIGS); do $(PY) run_audit.py --quick --config $$c || exit 1; done
 
-audit: $(STAMP)  ## Full audit, writes data/processed/ and figures/
-	$(PY) run_audit.py
+audit: $(STAMP)  ## Full audit on both datasets, writes data/processed/ and figures/
+	@for c in $(CONFIGS); do $(PY) run_audit.py --config $$c || exit 1; done
 
 app: $(STAMP)  ## Launch the Streamlit app
 	$(VENV)/bin/streamlit run app/app.py
