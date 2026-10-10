@@ -31,7 +31,7 @@ print(f"Positive rate (income >50K): {y.mean():.3f}   (Adult is known to be ~0.2
 print(f"Missing values in X: {int(X.isna().sum().sum())}")
 for a in groups.columns:
     vc = groups[a].value_counts()
-    print(f"  {a}: " + ", ".join(f"{k}={v} ({v/len(groups):.1%}, approved {y[groups[a]==k].mean():.1%})" for k, v in vc.items()))
+    print(f"  {a}: " + ", ".join(f"{k}={v} ({v/len(groups):.1%}, approved {y[groups[a] == k].mean():.1%})" for k, v in vc.items()))
 
 print("\n" + "=" * 70, "\n2b. MODEL\n" + "=" * 70)
 X_tr, X_te, y_tr, y_te, g_tr, g_te = split(X, y, groups, cfg)

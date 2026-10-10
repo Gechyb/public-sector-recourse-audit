@@ -21,7 +21,10 @@ have similar error rates across groups and still give some groups a far harder
   definition (Ding et al. 2021). It is recoded to Adult's column names, and the same
   recourse rules apply wherever a feature exists
   ([`config/constraints_acs_nc.yaml`](config/constraints_acs_nc.yaml)). This asks
-  whether gaps found on the 1994 benchmark still hold in current data.
+  whether gaps found on the 1994 benchmark still hold in current data. "Approved"
+  means income above **$103K**, Adult's 1994 $50K in 2023 dollars, so both datasets
+  use the same real-dollar bar. The ACSIncome standard of $50K (not inflation-adjusted)
+  runs as a robustness check ([`config/constraints_acs_nc_50k.yaml`](config/constraints_acs_nc_50k.yaml)).
 - **Models:** logistic regression and gradient boosting (`HistGradientBoostingClassifier`).
   Sex and race are **excluded** from model inputs by default
   (`use_protected_in_model: false`), as most public agencies are required to do.
@@ -94,7 +97,9 @@ Requires Python 3.10+ and `make`. After cloning:
 
 ```bash
 make setup    # create .venv, install requirements, download the data
-make quick    # smoke test (~15 s)
+make test     # automated correctness tests
+make lint     # code style check (flake8)
+make quick    # smoke test on every config (~1 min)
 make audit    # full audit (a few minutes)
 make app      # interactive Streamlit explorer
 make help     # list all targets

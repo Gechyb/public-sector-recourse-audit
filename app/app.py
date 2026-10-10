@@ -91,8 +91,8 @@ with tab_ind:
         else:
             st.error("No feasible recourse: no allowed change to the actionable "
                      "features gets this applicant approved.")
-        st.caption("Immutable: " + ", ".join(cfg["immutable"]) +
-                   ". Actionable: " + ", ".join(search.space.features) + ".")
+        st.caption(f"Immutable: {', '.join(cfg['immutable'])}. "
+                   f"Actionable: {', '.join(search.space.features)}.")
 
 with tab_audit:
     PROCESSED_DIR, FIGURES_DIR = output_dirs(cfg)

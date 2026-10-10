@@ -13,10 +13,11 @@ data:
   source: acs              # ACS PUMS via folktables, cached to data/raw/
   state: NC
   year: 2023               # most recent 1-year PUMS at the time of writing
-  # ACSIncome's standard label (Ding et al. 2021): personal income > $50,000.
-  # It is NOT inflation-adjusted: Adult's 1994 $50K is ~$105K in 2023 dollars, so
-  # far more people are "approved" here (~44% vs ~24%).
-  income_threshold: 50000
+  # Adult's $50K (1994) in 2023 dollars: 50,000 x CPI-U 304.7 / 148.2 = ~$103K.
+  # Same real-dollar bar as Adult, so the 1994 vs 2023 comparison is not driven
+  # by a lower bar. ~15% approved. The ACSIncome standard of $50K (not inflation-
+  # adjusted, ~44% approved) runs as a robustness check: constraints_acs_nc_50k.yaml.
+  income_threshold: 103000
   target: income
   positive_label: above    # favourable outcome (the model's "approve")
   drop:

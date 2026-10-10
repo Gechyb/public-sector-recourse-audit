@@ -1,0 +1,9 @@
+# Robustness check: ACS North Carolina with ACSIncome's standard label (Ding et al.
+# 2021), personal income > $50,000, NOT inflation-adjusted (~44% approved).
+# Comparable to published folktables results; everything else is inherited from
+# the main ACS config.
+extends: constraints_acs_nc.yaml
+
+data:
+  name: acs_nc_2023_50k
+  income_threshold: 50000

@@ -62,7 +62,7 @@ def test_acs_dataset(acs):
     assert X["education_num"].between(1, 16).all()
     assert set(groups["race_group"]) == {"White", "Black", "Other"}
     # label rate follows the configured threshold
-    expected = {50000: 0.435}.get(cfg["data"]["income_threshold"])
+    expected = {50000: 0.435, 103000: 0.154}.get(cfg["data"]["income_threshold"])
     if expected is not None:
         assert abs(y.mean() - expected) < 0.005
 
@@ -80,3 +80,12 @@ def test_acs_audit_runs_and_respects_constraints(acs):
         assert rec["found"].any()
         if mode == "constrained":
             assert (rec["n_violations"] == 0).all()
+
+
+def test_50k_config_inherits_everything_but_threshold_and_name():
+    main = load_config(ACS_CONFIG)
+    alt = load_config(ACS_CONFIG.with_name("constraints_acs_nc_50k.yaml"))
+    assert alt["data"]["income_threshold"] == 50000 and main["data"]["income_threshold"] == 103000
+    assert alt["data"]["name"] != main["data"]["name"]
+    strip = lambda c: {**c, "data": {k: v for k, v in c["data"].items() if k not in ("name", "income_threshold")}}  # noqa: E731
+    assert strip(alt) == strip(main)

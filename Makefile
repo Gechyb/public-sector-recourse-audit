@@ -2,6 +2,7 @@
 #
 #   make setup    # create .venv, install dependencies, download the data
 #   make test     # automated correctness checks
+#   make lint     # code style check (flake8)
 #   make quick    # ~15 s smoke test of the full pipeline
 #   make audit    # full audit (a few minutes)
 #   make app      # launch the Streamlit explorer
@@ -13,10 +14,10 @@ VENV   := .venv
 PY     := $(VENV)/bin/python
 PIP    := $(VENV)/bin/pip
 STAMP  := $(VENV)/.installed
-CONFIGS := config/constraints.yaml config/constraints_acs_nc.yaml
+CONFIGS := config/constraints.yaml config/constraints_acs_nc.yaml config/constraints_acs_nc_50k.yaml
 
 .DEFAULT_GOAL := help
-.PHONY: help setup install data test verify quick audit app clean clean-all
+.PHONY: help setup install data test lint verify quick audit app clean clean-all
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | \
@@ -43,13 +44,16 @@ data: $(STAMP)  ## Download UCI Adult and ACS North Carolina into data/raw/ (cac
 test: $(STAMP)  ## Run the automated correctness tests
 	$(PY) -m pytest tests -q
 
+lint: $(STAMP)  ## Check code style with flake8 (settings in setup.cfg)
+	$(PY) -m flake8 src tests scripts app run_audit.py
+
 verify: $(STAMP)  ## Print a readable walkthrough: data, model, recourse examples
 	$(PY) scripts/verify.py
 
-quick: $(STAMP)  ## Smoke test: tiny end-to-end run on both datasets (~30 s)
+quick: $(STAMP)  ## Smoke test: tiny end-to-end run on every config (~1 min)
 	@for c in $(CONFIGS); do $(PY) run_audit.py --quick --config $$c || exit 1; done
 
-audit: $(STAMP)  ## Full audit on both datasets, writes data/processed/ and figures/
+audit: $(STAMP)  ## Full audit on every config, writes data/processed/ and figures/
 	@for c in $(CONFIGS); do $(PY) run_audit.py --config $$c || exit 1; done
 
 app: $(STAMP)  ## Launch the Streamlit app

@@ -22,9 +22,21 @@ def output_dirs(cfg: dict) -> tuple[Path, Path]:
     return dirs
 
 
+def _merge(base: dict, override: dict) -> dict:
+    out = dict(base)
+    for k, v in override.items():
+        out[k] = _merge(out[k], v) if isinstance(v, dict) and isinstance(out.get(k), dict) else v
+    return out
+
+
 def load_config(path: str | Path = ROOT / "config" / "constraints.yaml") -> dict:
+    """Load a YAML config. A config may set ``extends: <other.yaml>`` (relative to
+    its own folder) to inherit everything and override only what it lists."""
+    path = Path(path)
     with open(path) as f:
-        return yaml.safe_load(f)
+        cfg = yaml.safe_load(f)
+    parent = cfg.pop("extends", None)
+    return _merge(load_config(path.parent / parent), cfg) if parent else cfg
 
 
 def _clean_columns(df: pd.DataFrame) -> pd.DataFrame:
