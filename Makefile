@@ -1,6 +1,7 @@
 # Public-sector recourse audit
 #
 #   make setup    # create .venv, install dependencies, download the data
+#   make test     # automated correctness checks
 #   make quick    # ~15 s smoke test of the full pipeline
 #   make audit    # full audit (a few minutes)
 #   make app      # launch the Streamlit explorer
@@ -14,7 +15,7 @@ PIP    := $(VENV)/bin/pip
 STAMP  := $(VENV)/.installed
 
 .DEFAULT_GOAL := help
-.PHONY: help setup install data quick audit app clean clean-all
+.PHONY: help setup install data test verify quick audit app clean clean-all
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | \
@@ -35,6 +36,12 @@ install: $(STAMP)  ## Create .venv and install requirements.txt
 
 data: $(STAMP)  ## Download UCI Adult from OpenML into data/raw/ (cached)
 	$(PY) -c "from src.data_loader import load_adult; df = load_adult(); print('data/raw/adult.csv:', df.shape)"
+
+test: $(STAMP)  ## Run the automated correctness tests
+	$(PY) -m pytest tests -q
+
+verify: $(STAMP)  ## Print a readable walkthrough: data, model, recourse examples
+	$(PY) scripts/verify.py
 
 quick: $(STAMP)  ## Smoke test: tiny end-to-end run (~15 s)
 	$(PY) run_audit.py --quick
