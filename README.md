@@ -9,6 +9,9 @@ question that matters to the person affected: *what can I do about it?* A model 
 have similar error rates across groups and still give some groups a far harder
 (or impossible) path to a favourable decision. This project measures that gap.
 
+**Full write-up:** [REPORT.md](REPORT.md) covers background and related work, results with
+figures, intended use, limitations, and future work.
+
 ## Setting
 
 - **Data:** UCI Adult (1994 US Census extract, 48,842 people), loaded from OpenML
