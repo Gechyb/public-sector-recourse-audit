@@ -15,6 +15,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -101,8 +102,8 @@ st.markdown(
     "group? This audit compares **realistic recourse** (only changes a person can actually "
     "make) with what an **off-the-shelf counterfactual tool** would recommend.")
 
-tab_find, tab_try, tab_groups, tab_compare = st.tabs(
-    ["Findings", "Try an applicant", "Group audit", "1994 vs 2023"])
+tab_find, tab_try, tab_groups, tab_compare, tab_method = st.tabs(
+    ["Findings", "Try an applicant", "Group audit", "1994 vs 2023", "Method"])
 
 
 # --- findings ---------------------------------------------------------------
@@ -364,3 +365,106 @@ with tab_compare:
         st.caption("Each group vs the largest group, 95% bootstrap CIs. Compare the colours within a row "
                    "to see how a gap changed between 1994 and 2023.")
         _table(gaps.drop(columns=["metric"]))
+
+
+# --- method -----------------------------------------------------------------
+
+def rules_table(cfg: dict, X: pd.DataFrame) -> pd.DataFrame:
+    """One row per model feature: how recourse may change it, and at what cost."""
+    num, cat = cfg["actionable"].get("numeric", {}), cfg["actionable"].get("categorical", {})
+    rows = []
+    for f in X.columns:
+        if f in num:
+            a = num[f]
+            kind = "monotonic" if a["direction"] in ("increase", "decrease") else "bounded"
+            rule = f"{a['direction']} only" if kind == "monotonic" else "up or down"
+            rows.append({"feature": f, "type": kind, "allowed change": f"{rule}, {a['min']:g} to {a['max']:g}",
+                         "cost": f"{a['cost_per_unit']:g} per unit"})
+        elif f in cat:
+            a = cat[f]
+            excl = f" (never: {', '.join(a.get('exclude', []))})" if a.get("exclude") else ""
+            rows.append({"feature": f, "type": "bounded", "allowed change": f"switch category{excl}",
+                         "cost": f"{a['cost']:g} per switch"})
+        else:
+            rows.append({"feature": f, "type": "immutable", "allowed change": "none", "cost": "n/a"})
+    return pd.DataFrame(rows)
+
+
+with tab_method:
+    st.subheader("What counts as recourse")
+    st.markdown(
+        "Every feature the model uses is **immutable** (the person cannot, or should not be told "
+        "to, change it), **monotonic** (one direction only), or **bounded** (either direction, "
+        "within realistic limits). Sex and race are never model inputs, so recourse can never "
+        "recommend changing them, but proxies such as relationship and marital status are.")
+    st.dataframe(rules_table(cfg, X_train), hide_index=True, width="stretch")
+    st.caption("Costs are effort units: 1 = one extra year of school. They are assumptions made "
+               "explicit so they can be argued with; compare them across groups, not as absolutes.")
+    cfg_path = ROOT / "config" / config
+    with st.expander(f"The constraints file, with a reason for every rule ({cfg_path.name})"):
+        st.code(cfg_path.read_text(), language="yaml")
+        parent = yaml.safe_load(cfg_path.read_text()).get("extends")
+        if parent:  # this config only overrides a few lines of another
+            st.caption(f"Everything else is inherited from {parent}:")
+            st.code((cfg_path.parent / parent).read_text(), language="yaml")
+
+    st.subheader("How the audit works")
+    st.markdown(f"""
+1. **Train** logistic regression and gradient boosting on 70% of the data; audit denied
+   applicants from the other 30% (about 800 per model, at least 100 per group).
+2. **Realistic recourse.** For each denied applicant, search for the cheapest set of up to
+   {cfg['recourse']['max_features_changed']} allowed changes that flips the decision: every
+   single change, then {cfg['recourse']['n_candidates']:,} random combinations, then shrink the
+   best one back toward the original. Over a budget of {cfg['recourse']['max_cost']:g}, the
+   applicant has no recourse.
+3. **Off-the-shelf baseline.** The same search with every feature changeable and plain
+   distance as the cost, like generic counterfactual tools
+   (Wachter et al. 2017; DiCE). Each recommendation is checked against the rules above;
+   the share that breaks one is the **violation rate**.
+4. **Is a gap real?** Each group is compared with the largest group, with 95% bootstrap
+   confidence intervals ({cfg['analysis']['n_bootstrap']:,} resamples).
+5. **Same starting distance.** Denied applicants are split into
+   {cfg['analysis']['distance_bins']} bands by how close they were to approval, and groups are
+   compared within bands. A gap that survives is not explained by where people start.
+6. **Budget curves** show whether a gap closes as more effort is allowed.
+""")
+
+    st.subheader("Limitations")
+    st.markdown("""
+- **The label is a proxy.** Income above a threshold is not a real benefit decision; in means-tested
+  programs a *lower* income qualifies. The contribution is the audit protocol, not a claim about
+  any agency.
+- **Costs and immutability are judgments.** Treating marital status as immutable, or 20 extra
+  hours as equal to a year of school, are explicit choices. Changing them changes the numbers;
+  that is why they live in one readable file.
+- **The search is heuristic.** "No recourse found" means none was found within the action space
+  and budget, not proof that none exists.
+- **Starting-distance bands are coarse.** Five bands reduce, but do not remove, differences in
+  where groups start; intervals are wide where few people of a group start near approval
+  (e.g. under-30s).
+- **Recoding ACS to Adult's schema is approximate** (24 school levels to 16, ~530 occupation
+  codes to 23 groups, birthplace to world region).
+- **Recourse is for the model as trained.** If the model is retrained, a recommended change may
+  no longer lead to approval.
+- **Groups are coarse.** Race is White / Black / Other, and intersections (e.g. young Black
+  women) are not audited separately.
+""")
+
+    st.subheader("Intended use")
+    st.markdown("""
+A **research audit on public survey data**, not an eligibility system and not advice to real people.
+It is meant for **auditors and agencies** evaluating a decision model before deployment, and for
+**researchers** comparing recourse methods. It should not be used to tell an individual what to
+change, or to certify a model as fair: a model with equal recourse can still be unfair in other ways.
+""")
+
+    st.subheader("References")
+    st.markdown("""
+- Wachter, Mittelstadt & Russell (2017). Counterfactual explanations without opening the black box. *Harvard Journal of Law & Technology*.
+- Ustun, Spangher & Liu (2019). Actionable recourse in linear classification. *FAT\\* 2019*.
+- Gupta, Nokhiz, Roy & Venkatasubramanian (2019). Equalizing recourse across groups. *arXiv:1909.03166*.
+- Mothilal, Sharma & Tan (2020). Explaining machine learning classifiers through diverse counterfactual explanations (DiCE). *FAT\\* 2020*.
+- Ding, Hardt, Miller & Schmidt (2021). Retiring Adult: New datasets for fair machine learning. *NeurIPS 2021*.
+- Karimi, Barthe, Schölkopf & Valera (2022). A survey of algorithmic recourse. *ACM Computing Surveys*.
+- von Kügelgen, Karimi, Bhatt, Valera, Weller & Schölkopf (2022). On the fairness of causal algorithmic recourse. *AAAI 2022*.
+""")

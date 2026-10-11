@@ -62,3 +62,15 @@ def test_comparison_tab_gap_toggle():
     gap_radio = next(r for r in at.radio if r.label == "Gap")
     gap_radio.set_value("recourse_rate_gap").run()
     assert not at.exception
+
+
+@pytest.mark.parametrize("dataset", DATASETS)
+def test_method_tab(dataset):
+    at = _run(dataset)
+    headers = {h.value for h in at.subheader}
+    assert {"What counts as recourse", "How the audit works", "Limitations",
+            "Intended use", "References"} <= headers
+    yaml_blocks = [c.value for c in at.code if c.language == "yaml"]
+    assert any("immutable:" in b for b in yaml_blocks)  # the real file, with its rules
+    if "50K" in dataset:  # inherited config shows its parent too
+        assert len(yaml_blocks) == 2 and "extends:" in yaml_blocks[0]
