@@ -1,0 +1,9 @@
+attribute,group,n_denied_audited,recourse_rate,violation_rate,top_violated_feature,variant
+sex,Female,405,0.928395061728395,0.39361702127659576,age,all_features
+sex,Male,395,0.9215189873417722,0.3873626373626374,age,all_features
+race_group,Black,126,0.9206349206349206,0.4482758620689655,age,all_features
+race_group,Other,144,0.8611111111111112,0.3870967741935484,age,all_features
+race_group,White,530,0.9433962264150944,0.378,age,all_features
+age_group,30-49,288,0.9756944444444444,0.4128113879003559,age,all_features
+age_group,50+,308,0.9902597402597403,0.2,age,all_features
+age_group,<30,204,0.7549019607843137,0.7272727272727273,age,all_features

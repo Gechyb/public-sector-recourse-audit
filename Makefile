@@ -17,7 +17,7 @@ STAMP  := $(VENV)/.installed
 CONFIGS := config/constraints.yaml config/constraints_acs_nc.yaml config/constraints_acs_nc_50k.yaml
 
 .DEFAULT_GOAL := help
-.PHONY: help setup install data test lint verify quick audit app clean clean-all
+.PHONY: help setup install data test lint verify quick audit figures app clean clean-all
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | \
@@ -55,6 +55,9 @@ quick: $(STAMP)  ## Smoke test: tiny end-to-end run on every config (~1 min)
 
 audit: $(STAMP)  ## Full audit on every config, writes data/processed/ and figures/
 	@for c in $(CONFIGS); do $(PY) run_audit.py --config $$c || exit 1; done
+
+figures: $(STAMP)  ## Redraw all figures from the result CSVs (no re-run)
+	$(PY) scripts/make_figures.py
 
 app: $(STAMP)  ## Launch the Streamlit app
 	$(VENV)/bin/streamlit run app/app.py

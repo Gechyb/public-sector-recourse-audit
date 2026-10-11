@@ -200,11 +200,16 @@ def plot_budget_curves(curves: pd.DataFrame, path: Path, model_name: str, budget
     for ax, attr in zip(axes, attrs):
         d = curves[curves["attribute"] == attr]
         order = AGE_ORDER if attr == "age_group" else sorted(d["group"].unique())
+        ends = []
         for k, grp in enumerate([o for o in order if o in set(d["group"])]):
             s = d[d["group"] == grp]
             ax.plot(s["budget"], s["recourse_rate"], color=SERIES[k], linewidth=2, label=grp)
-            ax.text(s["budget"].iloc[-1], s["recourse_rate"].iloc[-1], f" {grp}",
-                    va="center", color=INK_2, fontsize=8.5)
+            ends.append([s["recourse_rate"].iloc[-1], grp, s["budget"].iloc[-1]])
+        ends.sort()
+        for i in range(1, len(ends)):  # keep end labels at least 7 points apart
+            ends[i][0] = max(ends[i][0], ends[i - 1][0] + 0.07)
+        for yv, grp, xv in ends:
+            ax.text(xv, yv, f" {grp}", va="center", color=INK_2, fontsize=8.5)
         if budget is not None:
             ax.axvline(budget, color=INK_2, linewidth=1, linestyle="--")
             ax.text(budget, 0.02, " audit budget", color=INK_2, fontsize=8, va="bottom")
@@ -246,8 +251,9 @@ def plot_gaps(gaps: pd.DataFrame, path: Path, model_name: str,
     ax.grid(axis="y", visible=False)
     ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v * 100:+.0f} pp"))
     ax.set_xlabel("difference in recourse rate (percentage points, 95% CI)")
-    ax.legend(loc="lower right", frameon=False, fontsize=8)
     ax.set_title(f"Who is less likely to have recourse? ({model_name})")
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", ncol=len(metrics),
+               frameon=False, fontsize=8.5)
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)

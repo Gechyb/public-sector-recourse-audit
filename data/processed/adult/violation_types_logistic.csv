@@ -1,0 +1,11 @@
+violation,count,share_of_recommendations,variant
+immutable:capital_gain,824,0.9526011560693641,all_features
+immutable:marital_status,60,0.06936416184971098,all_features
+immutable:age,1,0.0011560693641618498,all_features
+immutable:marital_status,442,0.5792922673656619,no_capital
+immutable:relationship,77,0.10091743119266056,no_capital
+immutable:native_country,73,0.09567496723460026,no_capital
+immutable:age,64,0.08387942332896461,no_capital
+bounds:hours_per_week,19,0.02490170380078637,no_capital
+excluded:occupation,2,0.002621231979030144,no_capital
+excluded:workclass,1,0.001310615989515072,no_capital

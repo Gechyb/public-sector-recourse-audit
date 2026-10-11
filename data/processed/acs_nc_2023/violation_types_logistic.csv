@@ -1,0 +1,6 @@
+violation,count,share_of_recommendations,variant
+immutable:age,191,0.2581081081081081,all_features
+immutable:relationship,63,0.08513513513513514,all_features
+bounds:hours_per_week,60,0.08108108108108109,all_features
+immutable:marital_status,45,0.060810810810810814,all_features
+immutable:native_country,15,0.02027027027027027,all_features

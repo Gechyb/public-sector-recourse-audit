@@ -1,0 +1,7 @@
+violation,count,share_of_recommendations,variant
+immutable:age,247,0.31505102040816324,all_features
+immutable:relationship,60,0.07653061224489796,all_features
+immutable:marital_status,45,0.05739795918367347,all_features
+excluded:occupation,19,0.02423469387755102,all_features
+immutable:native_country,2,0.002551020408163265,all_features
+excluded:workclass,1,0.0012755102040816326,all_features

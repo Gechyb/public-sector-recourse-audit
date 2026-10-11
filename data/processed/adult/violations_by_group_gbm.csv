@@ -1,0 +1,17 @@
+attribute,group,n_denied_audited,recourse_rate,violation_rate,top_violated_feature,variant
+sex,Female,340,1.0,0.9558823529411765,capital_gain,all_features
+sex,Male,541,1.0,0.9482439926062847,capital_gain,all_features
+race_group,Black,100,1.0,0.99,capital_gain,all_features
+race_group,Other,100,1.0,0.95,capital_gain,all_features
+race_group,White,681,1.0,0.9456681350954479,capital_gain,all_features
+age_group,30-49,397,1.0,0.9345088161209067,capital_gain,all_features
+age_group,50+,162,1.0,0.8950617283950617,capital_gain,all_features
+age_group,<30,322,1.0,1.0,capital_gain,all_features
+sex,Female,340,0.8264705882352941,0.900355871886121,marital_status,no_capital
+sex,Male,541,0.8595194085027726,0.6881720430107527,marital_status,no_capital
+race_group,Black,100,0.75,0.8666666666666667,marital_status,no_capital
+race_group,Other,100,0.84,0.7976190476190477,marital_status,no_capital
+race_group,White,681,0.8619676945668135,0.7512776831345827,marital_status,no_capital
+age_group,30-49,397,0.9395465994962217,0.7158176943699732,marital_status,no_capital
+age_group,50+,162,0.9629629629629629,0.6410256410256411,marital_status,no_capital
+age_group,<30,322,0.6739130434782609,0.9493087557603687,age,no_capital

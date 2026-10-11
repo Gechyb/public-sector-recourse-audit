@@ -1,0 +1,10 @@
+attribute,metric,worst_group,best_group,gap,ratio
+age_group,recourse_rate,<30,50+,0.15068493150684936,1.1774193548387097
+age_group,mean_cost,<30,50+,1.2789286771234094,2.109677419354839
+age_group,median_cost,<30,50+,1.5,2.5
+race_group,recourse_rate,Black,Other,0.02692424703376939,1.0292320396366639
+race_group,mean_cost,Other,White,0.4092715592334495,1.2702338371946726
+race_group,median_cost,Black,White,0.25,1.2
+sex,recourse_rate,Male,Female,0.021052631578947323,1.0226628895184136
+sex,mean_cost,Male,Female,0.2738325984934007,1.1808178846485178
+sex,median_cost,Male,Female,0.25,1.2

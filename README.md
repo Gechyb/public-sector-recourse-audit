@@ -101,6 +101,7 @@ make test     # automated correctness tests
 make lint     # code style check (flake8)
 make quick    # smoke test on every config (~1 min)
 make audit    # full audit (a few minutes)
+make figures  # redraw all figures from the result CSVs (no re-run)
 make app      # interactive Streamlit explorer
 make help     # list all targets
 ```
