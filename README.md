@@ -96,7 +96,7 @@ public-sector-recourse-audit/
 
 ## Usage
 
-Requires Python 3.10+ and `make`. After cloning:
+Requires Python 3.11+ and `make`. After cloning:
 
 ```bash
 make setup    # create .venv, install requirements, download the data
