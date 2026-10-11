@@ -43,3 +43,22 @@ def test_group_filter_and_budget_slider():
     assert not at.exception
     ages = [int(o.split("age ")[1].split(" ")[0]) for o in at.selectbox[2].options]
     assert ages and max(ages) < 30  # filter keeps only under-30 applicants
+
+
+@pytest.mark.parametrize("dataset", DATASETS)
+def test_group_audit_and_comparison_tabs(dataset):
+    at = _run(dataset)
+    headers = {h.value for h in at.subheader}
+    assert {"Who gets a realistic path to approval?", "Which gaps are real?",
+            "Does more effort close the gap?",
+            "What does off-the-shelf recourse ask people to change?"} <= headers
+    # 3 recourse-by-group + 1 gaps + 3 budget curves + 1 violation types + 1 comparison
+    assert len(at.get("arrow_vega_lite_chart")) == 9
+    assert any("What is recourse?" in i.value for i in at.info)
+
+
+def test_comparison_tab_gap_toggle():
+    at = _run()
+    gap_radio = next(r for r in at.radio if r.label == "Gap")
+    gap_radio.set_value("recourse_rate_gap").run()
+    assert not at.exception

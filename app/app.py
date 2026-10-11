@@ -18,6 +18,9 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import charts  # noqa: E402
 
 from src.data_loader import load_config, output_dirs, prepare  # noqa: E402
 from src.metrics import constraint_violations  # noqa: E402
@@ -98,7 +101,8 @@ st.markdown(
     "group? This audit compares **realistic recourse** (only changes a person can actually "
     "make) with what an **off-the-shelf counterfactual tool** would recommend.")
 
-tab_find, tab_try = st.tabs(["Findings", "Try an applicant"])
+tab_find, tab_try, tab_groups, tab_compare = st.tabs(
+    ["Findings", "Try an applicant", "Group audit", "1994 vs 2023"])
 
 
 # --- findings ---------------------------------------------------------------
@@ -131,6 +135,12 @@ def finding_sentences(gaps: pd.DataFrame) -> list[str]:
 
 
 with tab_find:
+    st.info(
+        "**What is recourse?** If a model denies you, recourse is a change *you* could make "
+        "to get approved. Example from this data: a 32-year-old denied at 40 hours a week "
+        "would be approved at **45 hours**. An explanation says *why* you were denied; recourse "
+        "says *what you can do about it*. Advice like \"be older\" or \"get married\" may flip "
+        "the model, but it is not recourse, because no one can act on it.")
     if "summary" not in results:
         st.info("No audit results for this dataset yet. Run `make audit` first.")
     else:
@@ -261,3 +271,96 @@ with tab_try:
                        "cheapest by plain distance.")
             with st.spinner("Searching..."):
                 show_result(x, run_search(x, "unconstrained", freeze=variants[var]), None)
+
+
+# --- group audit ------------------------------------------------------------
+
+def _table(df: pd.DataFrame, label: str = "Show the numbers"):
+    with st.expander(label):
+        st.dataframe(df.round(3), hide_index=True, width="stretch")
+
+
+with tab_groups:
+    needed = {"recourse_by_group", "violations_by_group", "group_gaps", "budget_curves", "violation_types"}
+    if not needed <= set(results):
+        st.info("No audit results for this dataset yet. Run `make audit` first.")
+    else:
+        variants = list(cfg["unconstrained"]["variants"])
+        variant = st.radio("Off-the-shelf variant", variants, format_func=VARIANT_LABELS.get,
+                           horizontal=True, key="groups_variant") if len(variants) > 1 else variants[0]
+        vio = results["violations_by_group"]
+        uncon = vio[vio["variant"] == variant]
+        attrs = list(dict.fromkeys(results["recourse_by_group"]["attribute"]))
+
+        st.subheader("Who gets a realistic path to approval?")
+        st.caption("Share of denied applicants with recourse. The off-the-shelf tool finds a path "
+                   "for almost everyone, but much of its advice is impossible to follow.")
+        for col, attr in zip(st.columns(len(attrs)), attrs):
+            col.altair_chart(charts.recourse_by_group(results["recourse_by_group"], uncon, attr),
+                             width="stretch")
+        _table(results["recourse_by_group"])
+
+        st.subheader("Which gaps are real?")
+        st.caption("Each group vs the largest group, with 95% bootstrap confidence intervals. A bar "
+                   "that crosses 0 is not a clear difference. If a gap shrinks to 0 at the same "
+                   "starting distance, it comes from where people start, not from the model's rules.")
+        gaps = results["group_gaps"]
+        gaps = gaps[gaps["metric"].isin(["recourse_rate_gap", "recourse_rate_gap_same_start"])].assign(
+            how=lambda d: d["metric"].map({"recourse_rate_gap": "raw gap",
+                                           "recourse_rate_gap_same_start": "same starting distance"}))
+        st.altair_chart(charts.gap_forest(gaps, "how", ["raw gap", "same starting distance"], ""),
+                        width="stretch")
+        _table(gaps.drop(columns=["metric"]))
+
+        st.subheader("Does more effort close the gap?")
+        st.caption("Share with recourse as the allowed effort grows. The dashed line is the budget "
+                   "in the sidebar. A curve that stays flat means more effort does not help.")
+        for col, attr in zip(st.columns(len(attrs)), attrs):
+            col.altair_chart(charts.budget_curves(results["budget_curves"], attr, max_cost),
+                             width="stretch")
+        _table(results["budget_curves"].pivot_table(index="budget", columns=["attribute", "group"],
+                                                    values="recourse_rate").reset_index())
+
+        st.subheader("What does off-the-shelf recourse ask people to change?")
+        st.caption("Rules broken by unconstrained recommendations: \"immutable\" means something a "
+                   "person cannot (or should not be told to) change.")
+        st.altair_chart(charts.violation_types(results["violation_types"], VARIANT_LABELS),
+                        width="stretch")
+        _table(results["violation_types"])
+
+
+# --- 1994 vs 2023 -----------------------------------------------------------
+
+with tab_compare:
+    st.markdown(
+        "The same audit on the 1994 benchmark and on 2023 North Carolina census data. "
+        "**$103K** is Adult's $50K in 2023 dollars (same real bar); **$50K** is the standard "
+        "ACSIncome bar, kept for comparison with published work.")
+    every = {name: get_results(cfg_file, kind) for name, cfg_file in DATASETS.items()}
+    every = {k: v for k, v in every.items() if "summary" in v and "group_gaps" in v}
+    if len(every) < 2:
+        st.info("Run `make audit` to produce results for at least two datasets.")
+    else:
+        rows = []
+        for name, r in every.items():
+            s = r["summary"].iloc[0]
+            var = "no_capital" if "violation_rate_no_capital" in s and pd.notna(s["violation_rate_no_capital"]) \
+                else "all_features"
+            rows.append({"dataset": name, "approved": s["approval_rate"],
+                         "denied with realistic recourse": s["recourse_rate"],
+                         "off-the-shelf advice breaking a rule": s[f"violation_rate_{var}"]})
+        head = pd.DataFrame(rows)
+        st.dataframe(head.style.format({c: "{:.0%}" for c in head.columns if c != "dataset"}),
+                     hide_index=True, width="stretch")
+        st.caption("Off-the-shelf figure for Adult holds capital gain/loss fixed, "
+                   "so it is comparable with ACS, which has no capital columns.")
+
+        which = st.radio("Gap", ["recourse_rate_gap_same_start", "recourse_rate_gap"], horizontal=True,
+                         format_func={"recourse_rate_gap": "raw gap",
+                                      "recourse_rate_gap_same_start": "at the same starting distance"}.get)
+        gaps = pd.concat([r["group_gaps"].assign(dataset=name) for name, r in every.items()])
+        gaps = gaps[gaps["metric"] == which]
+        st.altair_chart(charts.gap_forest(gaps, "dataset", list(every), ""), width="stretch")
+        st.caption("Each group vs the largest group, 95% bootstrap CIs. Compare the colours within a row "
+                   "to see how a gap changed between 1994 and 2023.")
+        _table(gaps.drop(columns=["metric"]))
