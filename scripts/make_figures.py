@@ -44,7 +44,29 @@ def redraw(cfg: dict) -> int:
     return n
 
 
+COMPARISON = {"Adult 1994": "constraints.yaml", "ACS NC 2023, $103K": "constraints_acs_nc.yaml",
+              "ACS NC 2023, $50K": "constraints_acs_nc_50k.yaml"}
+
+
+def redraw_comparison() -> int:
+    """1994 vs 2023: the same gaps across datasets, one figure per model and metric."""
+    root = Path(__file__).resolve().parents[1]
+    cfgs = {k: load_config(root / "config" / v) for k, v in COMPARISON.items()}
+    n = 0
+    for kind in cfgs["Adult 1994"]["model"]["kinds"]:
+        paths = {k: output_dirs(c)[0] / f"group_gaps_{kind}.csv" for k, c in cfgs.items()}
+        if not all(p.exists() for p in paths.values()):
+            continue
+        gaps = {k: pd.read_csv(p) for k, p in paths.items()}
+        figs = output_dirs(cfgs["Adult 1994"])[1].parent
+        for metric, suffix in [("recourse_rate_gap_same_start", "same_start"), ("recourse_rate_gap", "raw")]:
+            plots.plot_gaps_across_datasets(gaps, figs / f"comparison_gaps_{suffix}_{kind}.png", kind, metric)
+            n += 1
+    return n
+
+
 if __name__ == "__main__":
     for name in CONFIGS:
         cfg = load_config(Path(__file__).resolve().parents[1] / "config" / name)
         print(f"{cfg['data']['name']}: {redraw(cfg)} figures")
+    print(f"1994 vs 2023 comparison: {redraw_comparison()} figures")

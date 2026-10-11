@@ -257,3 +257,34 @@ def plot_gaps(gaps: pd.DataFrame, path: Path, model_name: str,
                frameon=False, fontsize=8.5)
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)
+
+
+def plot_gaps_across_datasets(gaps: dict[str, pd.DataFrame], path: Path, model_name: str,
+                              metric: str = "recourse_rate_gap_same_start"):
+    """Forest plot: the same comparison across datasets (e.g. 1994 vs 2023)."""
+    names = list(gaps)
+    first = gaps[names[0]]
+    first = first[first["metric"] == metric]
+    rows = list(dict.fromkeys(zip(first["group"], first["reference"])))
+    fig, ax = plt.subplots(figsize=(6.6, 0.7 * len(rows) + 1.4))
+    y = np.arange(len(rows))[::-1]
+    h = 0.6 / max(len(names) - 1, 1)
+    for k, name in enumerate(names):
+        d = gaps[name]
+        s = d[d["metric"] == metric].set_index(["group", "reference"]).reindex(rows)
+        yk = y + 0.3 - k * h
+        ax.errorbar(s["estimate"], yk, xerr=[s["estimate"] - s["ci_low"], s["ci_high"] - s["estimate"]],
+                    fmt="o", color=SERIES[k], markersize=6, elinewidth=2, capsize=0,
+                    markeredgecolor=SURFACE, markeredgewidth=1.5, label=name)
+    ax.axvline(0, color=INK_2, linewidth=1)
+    ax.set_yticks(y, [f"{g} vs {r}" for g, r in rows])
+    ax.grid(axis="y", visible=False)
+    ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v * 100:+.0f} pp"))
+    what = "at the same starting distance" if metric.endswith("same_start") else "raw"
+    ax.set_xlabel(f"difference in recourse rate, {what} (95% CI)")
+    ax.set_title(f"Recourse gaps, 1994 vs 2023 ({model_name})")
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
+    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", ncol=len(names),
+               frameon=False, fontsize=8.5)
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
