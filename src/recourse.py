@@ -237,5 +237,5 @@ class RecourseSearch:
         df = pd.DataFrame(records).set_index("row_id")
         for f in self.space.features:
             col = f"changed_{f}"
-            df[col] = df[col].fillna(False).astype(bool) if col in df else False
+            df[col] = df[col].eq(True) if col in df else False  # missing -> False
         return df
